@@ -26,7 +26,7 @@ e.g. <meta charset="utf-8" name="x-acc-js-link" content="url=http://localhost/ex
 
 <h3>Design Overview</h3>
 
-The browser extension has control over all tabs with background script. The background script maintains a key-value map for each tabId and its status. The background script is under 'background' folder. The SXG verification component given above is currently built in the extension using web assembly and the background script uses this component for signature verification. 
+The browser extension has control over all tabs with a service worker. The service worker maintains a key-value map for each tabId and its status. The background script is under 'background' folder. The SXG verification component given above is currently built in the extension using web assembly and the background script uses this component for signature verification. 
 
 The extension runs content script on start of each web request. The content script examines the Document Object Model(DOM) with Mutation Observer and sorts out the active content that can be inline script, external script, event handler or iframe. The content scripts can work both on the top level window and iframe contexts and send their active content list to the background script seperately.
 
@@ -105,8 +105,6 @@ stop.sh 				: [Stops the docker-compose]
 		make new project={project_name} : Creates a new project in /src/sites/{project_name}
 		make new : Creates a new project with {project_name}=test or test_1 or test_2 etc.
 		make sxg_keys : For creating SXG keys and certificates. Created sxg keys and certificates are placed in /src/keys/ folder.
-	
-	+ad_supplier 		: [Adsense imitation program, that supplies adverts for applications]
 	
 	+case-studies 		: [The case studies applications that we evaluated in the research paper, with the manifest files and signatures ]
 

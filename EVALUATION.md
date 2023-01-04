@@ -1,7 +1,6 @@
 
 
 <h3>The 'eval' folder :</h3>
-    *   accjs-extension : The Chrome extension that is prototyped by authors to evaluate performance and compatibility on various case studies.
     *   csp-disable-extension : This extension only works for 'web.whatsapp.com' and it removes Content-Security-Policy response headers.
     *   meta-code-verify : This extension is developed by Meta, it also only works for 'web.whatsapp.com'.
     *   docker : Includes a docker container to run the case study websites developed by authors and Nimiq websites (wallet,hub,keyguard) with specific response headers that should be configured for each evaluation. The docker container can create new websites, sign/evaluate manifest files and serve those websites on an Nginx server. 

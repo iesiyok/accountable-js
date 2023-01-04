@@ -1,15 +1,15 @@
 
 The folder includes :
+	*	accjs-extension : The Chrome extension that is prototyped by authors to evaluate performance and compatibility on various case studies.
 	* eval : Everything needed for evaluation (performance and compatibility). Docker containers, chrome browser extensions and an automated evaluation tool. 
 	* tamarin-protocol : Tamarin Prover model files for Accountable JS and Code Verify protocols.
 	* MANIFEST_MANUAL.md : elaborates on manifest directives used in manifest files
-	* accjs-full.pdf : the full version of the paper
+	* accjs-full.pdf : the full version of the research paper
 	* EVALUATION.md : Shows the evaluation procedures for the case studies.
 	* Browser_extension.md : Shows a full list of operations which the developer can follow to produce a manifest file automatically using chrome extension
 
 
 The 'eval' folder includes:
-	*	accjs-extension : The Chrome extension that is prototyped by authors to evaluate performance and compatibility on various case studies.
 	*	csp-disable-extension : This extension only works for 'web.whatsapp.com' and it removes Content-Security-Policy response headers.
 	*	meta-code-verify : This extension is developed by Meta, it also only works for 'web.whatsapp.com'.
 	*	docker : Includes a docker container to run the case study websites developed by authors and Nimiq websites (wallet,hub,keyguard) with specific response headers that should be configured for each evaluation. The docker container can create new websites, sign/evaluate manifest files and serve those websites on an Nginx server. More information is in EVALUATION.md file.
@@ -25,7 +25,7 @@ Then provide a x-acc-js-link response header in 'docker/src/conf/(no-csp || with
 
 The template also creates a new Makefile under the new app directory, with that you can generate the .sxg file from the manifest. It requires go/signedexchange tool, that is available with: go get -u github.com/WICG/webpackage/go/signedexchange/cmd/...
 more info available here : https://github.com/WICG/webpackage/tree/master/go/signedexchange
-But the docker container includes a copy of the signedexchange tool, the instructions are available in the created Makefile.
+However, the docker container includes a copy of the signedexchange tool, the instructions are available in the created Makefile.
 
 Running the docker will make your site accessible from the browser: e.g. http://localhost:8085/(test)/index.html
 
