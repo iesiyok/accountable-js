@@ -1,3 +1,5 @@
+If you want to collaborate with new ideas or you want to improve the browser extension implementation or you found a bug please contact me from ilkan.esiyok@cispa.de.
+
 
 The folder includes :
 	*	accjs-extension : The Chrome extension that is prototyped by authors to evaluate performance and compatibility on various case studies.
@@ -29,5 +31,5 @@ However, the docker container includes a copy of the signedexchange tool, the in
 
 Running the docker will make your site accessible from the browser: e.g. http://localhost:8085/(test)/index.html
 
-If you want to collaborate with new ideas or you want to improve the browser extension implementation or you found a bug please contact me from ilkan.esiyok@cispa.de 
+
 
