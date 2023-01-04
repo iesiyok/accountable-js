@@ -1,0 +1,145 @@
+{
+  "url": "http://localhost:8085/untrustedadsensenimiq/index.html",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8085/untrustedadsensenimiq/index_files/osd.js",
+      "hash": "sha384-iHLbSeZthDUMT0sW8tn/fd17AeH/IFr2pCPOxEC8e6yJGQ6J7Ij9QIr1PjHvJkWa",
+      "crossorigin": null,
+      "load": "sync",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "seq": 1,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8085/untrustedadsensenimiq/index_files/cookie.js",
+      "hash": "sha384-jmwT9i0jeoAwWdjQ8kXGMYP2bLpOTzbQly8h5iTygb9EtxLCEu43ETEYb0goWvRC",
+      "crossorigin": null,
+      "load": "sync",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "seq": 2,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8085/untrustedadsensenimiq/index_files/showads_imply.js",
+      "hash": "sha384-x/LKp6AXmjLkAzprB4EEXK7iLdx5CCH2e/Y6zdz3ncNVSjLlWvOxdz/pHMWc2ocD",
+      "crossorigin": null,
+      "load": "sync",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "seq": 3,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8085/untrustedadsensenimiq/index_files/adsbygoogle.js",
+      "hash": "sha384-N5LlytKS1rOkRIqE1XoVoua1aleQ/NROZOhUQ1cDehcV2FaCLad6dKecwE7ZMScv",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "seq": 4,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8085/untrustedadsensenimiq/index_files/integrator_de.js",
+      "hash": "sha384-ykeotLsCP5r+Fy5mlRY692RMLAjVNVsIPCfJijNhriiTzuVscXrmaxuJLJed61v7",
+      "crossorigin": null,
+      "load": "sync",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "seq": 5,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8085/untrustedadsensenimiq/index_files/integrator_com.js",
+      "hash": "sha384-atrR0+3kenVqyTUrndAqi/Q5Fh21T2/GabrzSLqSUnwnnl7FP3Zr/iHIyxZEqR0F",
+      "crossorigin": null,
+      "load": "sync",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "type": "iframe",
+      "seq": 6,
+      "src_type": "link",
+      "src": "http://localhost:8081/",
+      "sandbox": "allow-same-origin allow-scripts allow-forms",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "delegate"
+    },
+    {
+      "type": "iframe",
+      "seq": 7,
+      "src_type": "link",
+      "src": "http://localhost:8085/untrustedadsensenimiq/index_files/ads.html",
+      "sandbox": "allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "type": "iframe",
+      "seq": 8,
+      "src_type": "link",
+      "src": "http://localhost:8085/untrustedadsensenimiq/index_files/saved_resource.html",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "type": "iframe",
+      "seq": 9,
+      "src_type": "link",
+      "src": "http://localhost:8085/untrustedadsensenimiq/index_files/aframe.html",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "type": "iframe",
+      "seq": 10,
+      "src_type": "link",
+      "src": "http://localhost:8085/untrustedadsensenimiq/index_files/zrt_lookup.html",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "blindtrust"
+    },
+    {
+      "type": "iframe",
+      "seq": 11,
+      "src_type": "link",
+      "src": "about:blank",
+      "crossorigin": "",
+      "dynamic": true,
+      "trust": "blindtrust"
+    },
+    {
+      "type": "iframe",
+      "seq": 12,
+      "src_type": "link",
+      "src": "https://googleads.g.doubleclick.net/pagead/html/r20210630/r20190131/zrt_lookup.html",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "blindtrust"
+    }
+  ]
+}

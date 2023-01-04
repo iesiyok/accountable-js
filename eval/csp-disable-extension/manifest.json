@@ -1,0 +1,19 @@
+{
+  "name": "Disable CSP on whatsapp",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Disable content_security_policy",
+  "action": {
+    "default_icon": "img/favicon.ico"
+  },
+  "permissions": ["declarativeNetRequestWithHostAccess"],
+  "host_permissions":[
+    "https://web.whatsapp.com/*"
+  ],
+  "background": {
+      "service_worker" : "background.js"             
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' ;  object-src 'self'"
+  }
+}

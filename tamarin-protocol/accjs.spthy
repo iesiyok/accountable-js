@@ -1,0 +1,375 @@
+theory AccountableJavaScript
+begin
+
+builtins: multiset
+
+functions: 
+    pk/1, sk/1[private],
+    sign/2, verify/3[destructor],
+    true/0, eq/2,
+    extractmsg/1[destructor]
+
+equations: 
+    verify(pk(sk(i)), sign(sk(i), m), m ) = true,
+    extractmsg(sign(skey,m))=m // only for attacker
+
+
+predicates: LessThan(x,y) <=> (Ex z. y = x + z)
+            , HonestRun() <=> not (Ex p #j. Corrupted(p)@j)
+
+
+export queries:
+"
+set preciseActions = true.
+"
+
+// restriction webserver_mono:
+//     "All url v1 v2 #i #j. WebserverUpdated(url,v1)@i & WebserverUpdated(url,v2)@j & #i < #j
+//         ==> LessThan(v1,v2)"
+
+
+restriction webserver_dev_unique://for the same url, the W and D must be the same
+    "All w1 d1 w2 d2 u #i #j. WebserverDevUnique(w1,d1,u)@i & WebserverDevUnique(w2,d2,u)@j
+        ==> w1=w2 & d1=d2"
+
+restriction webserver_url_unique://it must be the same webserver
+    "All w1 w2 u #i #j. WebserverUrlUnique(w1,u)@i & WebserverUrlUnique(w2,u)@j
+        ==> w1=w2"
+
+restriction dev_url_unique://it must be the same developer 
+    "All d1 d2 u #i #j. DevUrlUnique(d1,u)@i & DevUrlUnique(d2,u)@j
+        ==> d1=d2"
+
+restriction content_ver_unique://it must be the same content if it is the same url and version
+    "All u v c1 c2 #i #j. ContentVersionUnique(u,v,c1)@i & ContentVersionUnique(u,v,c2)@j
+        ==> c1=c2 & #i = #j"
+
+
+restriction ledger_cannot_corrupt:// ledger always honest
+    "not (Ex x #i #j. Corrupted(x)@i & LedgerE(x)@j)"
+
+
+restriction log_stamp_unique:
+    "All u v c d l #i #j. LogsUnique(u,v,c,d,l)@i & LogsUnique(u,v,c,d,l)@j ==> #i = #j"
+
+
+restriction new_log_mono:
+    "All url v1 v2 #i #j. NewLogInserted(url,v1)@i & NewLogInserted(url,v2)@j & #i < #j
+        ==> LessThan(v1,v2)"
+
+
+// restriction timestamp_mono:
+//     "All u1 u2 ts1 ts2 #i #j. LogStamp(u1,ts1)@i & LogStamp(u2,ts2)@j & #i < #j
+//         ==> LessThan(ts1,ts2)"
+
+
+restriction parties_unique:
+    "All p #i #j. Party(p)@i & Party(p)@j
+        ==> #i=#j"
+
+
+
+let Developer =
+(
+    in($D);
+    event Party($D);
+    ((
+        event Corrupted($D); 
+        out(sk('D',$D)) 
+    )
+    |
+    out(pk(sk('D',$D)))
+    | (
+        in(<$content,$url,$v>);
+        if $content = 'malicious' then 0
+        else (
+
+            event DUploads($D,$url, $content);
+            event ContentVersionUnique($url, $v, $content);
+            event DevUrlUnique($D, $url);
+            
+            let mUpdate=<'update', $D, $content, $url, $v> in
+
+            out(<mUpdate, sign(sk('D',$D), mUpdate)>); 
+            in(<'updateNote', $L, =mUpdate, logstamp, $ts>);
+            if verify(pk(sk('L',$L)), logstamp, <$ts, sign(sk('D',$D), mUpdate)>)=true() then
+                out(<'updateCode', $W, $L, mUpdate, sign(sk('D',$D), mUpdate), logstamp, $ts>)
+        )
+
+    ))
+) 
+
+
+
+let Ledger = 
+(
+    in($L);
+    event Party($L);
+    event LedgerE($L);
+    (
+    out(pk(sk('L',$L)))
+    | (
+        in(<mUpdate, sigmUpdate>);
+        let <'update', $D, $content, $url, $v>=mUpdate in
+        if verify(pk(sk('D',$D)), sigmUpdate, mUpdate)=true() then
+            in($ts);
+            let logstamp = sign(sk('L',$L), <$ts, sigmUpdate>) in
+            event LogStamp($url,$content,$ts);
+            event LogsUnique($url, $v, $content, sigmUpdate, logstamp);
+            event NewLogInserted( $url, $v);
+            //event LogStampNonEquivocation(<$url, $D, $L, $content, $v, sigmUpdate, logstamp, $ts >);
+            insert <$D, $L, 'lversion', $url>, $v; 
+            insert <$D, $L, 'lcontent', $url>, $content;
+            insert <$D, $L, 'lsignD', $url>, sigmUpdate;
+            insert <$D, $L, 'lts', $url>, $ts;
+            insert <$D, $L, 'lsignL', $url>, logstamp;
+
+            out(<'updateNote', $L, mUpdate, logstamp, $ts>)
+    ))
+)
+
+let Webserver = 
+(
+    in($W);
+    event Party($W);
+    (
+
+        event Corrupted($W); 
+        out(pk(sk('W',$W)))
+    |
+    (
+        ( 
+                in(<'updateCode', =$W, $L, mUpdate, sigmUpdate, logstamp, $ts>); 
+                let <'update', $D, $content, $url, $v>=mUpdate in
+                
+                if (verify(pk(sk('L',$L)), logstamp, <$ts, sigmUpdate> )=true() &
+                        verify(pk(sk('D',$D)), sigmUpdate, mUpdate )=true()) then
+                
+                    lock $url;
+                    event WebserverDevUnique($W, $D, $url);
+                    event WebserverUpdated( $url, $v);
+                    event WCodeUpdated( $url, sigmUpdate, logstamp);
+                    insert < $W, 'developer', $url>, $D;
+                    insert < $W, 'ledger', $url>, $L;
+                    insert < $D, $L, 'version', $url>, $v; 
+                    insert < $D, $L, 'content', $url>, $content;
+                    insert < $D, $L, 'signD', $url>, sigmUpdate;//the signature from D
+                    insert < $D, $L, 'timestamp', $url>, $ts;
+                    insert < $D, $L, 'signL', $url>, logstamp;//the signature from L
+                    //TODOlater the logs must be accesible by the attacker
+                    unlock $url
+        )
+        ||
+        (
+                in(<'request', newReq, signewReq>);
+
+                let <$C, =$W, $url, ~n>=newReq in
+
+                if verify(pk(sk('C',$C)), signewReq, newReq)=true() then
+                    event WebserverUrlUnique($W, $url);
+                    lookup < $W, 'developer', $url> as $D in
+                    lookup < $W, 'ledger', $url> as $L in
+                    lookup < $D, $L, 'version', $url> as $v in 
+                    lookup < $D, $L, 'content', $url> as $content in
+                    lookup < $D, $L, 'signD', $url> as sigmUpdate in
+                    lookup < $D, $L, 'timestamp', $url> as $ts in
+                    lookup < $D, $L, 'signL', $url> as logstamp in
+                    //in($x_content); // superflous, but to make clear: adversary could send *any* content
+                    //transparency_developer lemma will fail if webserver sends x_content instead
+                    event WResponseSent( $W, $D, $url, ~n, $content);
+                    event Wsent(<$W, $url, ~n, sigmUpdate, logstamp>);
+                    event LearnedFromW(<$W, $url, $content, ~n>);
+
+                    let resp = <~n, $url, $v, $content, $C, $W, $D, $L, sigmUpdate, logstamp> in
+                    
+                    out(<'response', resp, sign(sk('W',$W), resp), $ts>)
+                        
+                    
+        )
+    ))
+)
+
+let Client = 
+(
+    in($C);
+    event Party($C);
+    (( 
+        event Corrupted($C); 
+        out(sk('C',$C)) 
+    )
+    |
+    out(pk(sk('C',$C)))
+    |
+    (
+        new ~n; in($url); 
+        
+        let newReq=<$C, $W, $url, ~n> in
+        
+        out(<'request', newReq, sign(sk('C',$C), newReq)>);
+
+
+        in(<'response', resp, sigResp, $ts>); 
+        let < =~n, =$url, $v, $content, =$C, =$W, $D, $L, sigmUpdate, logstamp>=resp in
+        
+
+        if (verify(pk(sk('W',$W)), sigResp, resp)=true() &
+            verify(pk(sk('D',$D)), sigmUpdate, <'update', $D, $content, $url, $v> )=true() &
+                verify(pk(sk('L',$L)), logstamp, <$ts, sigmUpdate>)=true()) then
+                    
+                    event CRecent(~n, $ts);
+                    event RecentResponseReceived($W, $url, ~n, $content, $ts);
+                    event HonestResponseReceived($C, $url, ~n);
+                    event CExecutes($D, $url, $content);
+                    event CExecuteTime($url, ~n, $content, $ts);
+                    //event End2EndGuarantee($D, $content);
+                    
+                    let evidence = <~n, $url, $v, $content, $C, $W, $D, $L, sigmUpdate, logstamp, sigResp> in
+                    
+                    out($url);
+                    out(<'claim', evidence, sign(sk('C',$C), evidence)>)
+
+    ))
+)
+
+
+let Pub = 
+    (
+        in($url);
+        lookup < $D, $L, 'lversion', $url> as $v in 
+        lookup < $D, $L, 'lcontent', $url> as $content in
+        lookup < $D, $L, 'lsignD', $url> as sigmUpdate in
+        lookup < $D, $L, 'lts', $url> as $ts in
+        lookup < $D, $L, 'lsignL', $url> as logstamp in
+        in(<'claim', <~n, =$url, =$v, =$content, $C, $W, $D, $L, =sigmUpdate, =logstamp, sigResp>, sigEvidence>);
+        
+
+        if (verify(pk(sk('C',$C)), sigEvidence, <~n, $url, $v, $content, $C, $W, $D, $L, sigmUpdate, logstamp, sigResp>)=true() &
+            verify(pk(sk('W',$W)), sigResp, <~n, $url, $v, $content, $C, $W, $D, $L, sigmUpdate, logstamp> )=true() &
+             verify(pk(sk('D',$D)), sigmUpdate, <'update', $D, $content, $url, $v>)=true() &
+              verify(pk(sk('L',$L)), logstamp, <$ts, sigmUpdate>)=true() )
+                  
+                 then
+                    //event PAccepts(<p_sigevidence, $C, $W, $D, $L, $url,~n, p_dsig, p_lsig, p_wsig>)
+                    event PAccepts(<$W, $url, $content, ~n, $ts>)
+
+    )
+
+//auto ; colossus ~3 minutes
+lemma dev_update_or_adv_provide [sources]:
+    "
+    All w u s1 s2 n #i. Wsent(<w,u,n,s1,s2>)@i ==>
+        ((Ex #j. KU(<s1,s2>)@j & j<i ) | (Ex #j. WCodeUpdated(u,s1,s2)@j & j<i  ))
+    "
+
+//auto ; colossus ~3 minutes
+// it is possible to receive a verified response without any corrupted party
+lemma sanity[output=[spthy]]: 
+     exists-trace
+      "Ex c url n #i. HonestResponseReceived(c,url,n)@i & HonestRun()"
+
+//auto ; takes ~10sec 
+//nonrepudiation lemma
+// Intuition: The client will only execute JS 
+// code if the code was uploaded by the honest developer 𝐷, 
+// or the developer was corrupted
+
+//QUE : The logstamp is missing in this lemma?
+//proverif: 0.0393 seconds
+lemma auth_of_origin:
+    " All d url content #i. CExecutes(d,url,content)@i 
+        ==>  (
+                (Ex #j. DUploads(d,url,content)@j) |
+                (Ex #k #l #m. Corrupted(d)@k & KU(url)@l & KU(content)@m )   
+            )
+        "
+
+//auto ; takes ~3 minutes
+//Intuition: if the client executes the code it must be recent
+//falsified --tamarin
+//proven -- proverif
+lemma code_recent:
+    " All u sid ts content #i. CExecuteTime(u, sid, content, ts)@i 
+        ==> Ex #j #k. 
+                LogStamp(u, content, ts)@j &  j < i
+                & CRecent(sid,ts)@k
+     "
+//auto ; takes ~5 minutes
+// Intuition: If the webser sends a JS response
+// (either the developer D has uploaded it or D is corrupted) and
+// the JS is in the logs.
+//Note also, it will fail if the webserver sends arbitrary content
+lemma transparency_developer:
+    " All w d u nonce content #i. WResponseSent(w,d,u,nonce,content)@i 
+        ==> ((Ex #j . DUploads(d,u,content)@j)
+            | (Ex #k. Corrupted(d)@k) & (Ex ts #l. LogStamp(u,content,ts)@l)
+            
+            )
+        "
+//auto ; takes ~3 minutes
+// Intuition: if Client receives a legitimate response from W
+// that means (webserver has sent it or webserver is corrupted)
+// and the Js is in the logs
+lemma transparency_webserver:
+    " All w u nonce content ts #i. RecentResponseReceived(w,u,nonce,content,ts)@i 
+        ==> ((Ex d  #j. WResponseSent(w,d,u,nonce,content)@j) |
+                (Ex #k. Corrupted(w)@k )) & (Ex #l. LogStamp(u,content,ts)@l & l<i)
+
+        "
+
+// TODO transfer e2eguarantee to this setting (need check for non-malicous in developer)
+
+//auto ; takes ~15 seconds 
+//stronger non-repudiation: 
+// Intuition: if public accepts a Js code reception, 
+// (either the code was learned from W or W is corrupted and adversary computed w,u,c,n by itself)
+// and the Js is in the logs
+lemma public_accept_claim_only_if_W_sent:
+    "
+        All w u content n ts #i . PAccepts(<w,u,content,n,ts>)@i 
+
+                ==>  (( Ex #j. LearnedFromW(<w,u,content,n>)@j & j <i ) |
+                    ((Ex #m. Corrupted(w)@m & m < i) 
+                    & (Ex #k1. KU(<w,u,content,n>)@k1 & k1<i  ) ) ) & (Ex #k2. LogStamp(u,content,ts)@k2 & k2<i  ) 
+    "
+
+
+lemma e2eguarantee:
+    " All d u #i. CExecutes(d,u, 'malicious')@i
+        ==> (Ex #k. Corrupted(d)@k)
+        "
+
+// verified 
+// corrupting D is sufficient to distribute malicious code
+lemma e2eNonguarantee:
+    exists-trace
+    " Ex d u #i. CExecutes( d, u, 'malicious')@i
+      & (All #k x. Corrupted(x)@k ==> (x = d ))
+        "
+
+
+//auto ; takes ~5 sec
+//TODO
+//: interesting, this contradicts my idea that Recent already encompasses
+//the behavior where the last two entries are accepted. the reason that this
+//lemma holds are the _mono restrictions, as you have already suggested. I am wondering: 
+//do we need this lemma? if not, we can get rid of all the _mono restrictions
+//and the LessThan predicate...
+// lemma latest_version:
+//     "All c n u ts #i. Recent(c,u,n,ts)@i
+//         ==> 
+//            not ( Ex ds1 ls1 ts1 #k. LogStamp(u,ds1,ls1,ts1)@k & LessThan(ts, ts1))  "
+
+
+
+
+
+
+process:
+    !Developer | !Webserver | !Client | Pub | !Ledger 
+
+end
+
+
+
+
+end

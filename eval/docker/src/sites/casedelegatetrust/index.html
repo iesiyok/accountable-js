@@ -1,0 +1,13 @@
+<html>
+<head>
+	<!-- <meta charset="utf-8" name="x-acc-js-link" content="url=http://localhost:8085/casedelegatetrust/index.html,sxg=http://localhost:8085/casedelegatetrust/index.sxg"> -->
+</head>
+<body>
+  <p>This is for test</p>
+ <script type="text/javascript">
+  function addTransaction () {
+    document.querySelector('iframe').contentWindow.postMessage({'id': '123', 'amount': '10n', 'from':'abc'}, '*');
+  }
+ </script>
+ <iframe src="http://localhost:8081/"  width="800" height="600" onload="addTransaction()" ></iframe>
+</body> </html>

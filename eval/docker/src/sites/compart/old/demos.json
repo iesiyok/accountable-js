@@ -1,0 +1,213 @@
+{
+  "url": "http://localhost:8080/demos.html",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8080/bitcoin/BitcoinJS.min.js",
+      "hash": "sha384-3AEnM/QEfJL7nL+CneIB0Bunknclq5zt3QA+8kOsP0wKMJM27H48hFpgg+htEV0r",
+      "crossorigin": "anonymous",
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 1,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://cdn.nimiq-testnet.com/v1.5.4/web-offline.js",
+      "hash": "sha384-E/6QJnv+vWgA4ZFJTmZcbN0x/Zo715x+nQscANpRmkcZWje5w6gCkDaWrqX0HWF8",
+      "crossorigin": "anonymous",
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 2,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8080/js/chunk-vendors.js",
+      "hash": "sha384-3wXwphyCjp+epH8LCtcIne5ymyRakiAa1oizXEibKyMn5UPK2N31xKOfLqijQ7DM",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 3,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8080/js/chunk-common.js",
+      "hash": "sha384-C7qgMcjg5z4dNx8LUcNPFQ+y5JZwfvMEVlE4EAxnfGeZolmUBGI8S80+jJ9Nz9CZ",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 4,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8080/js/demos.js",
+      "hash": "sha384-FioMCC35aG/CbJL8CAx16kDUrq1gNHbE0kTWsZQwLU1DsdEAJUdRxNlztam2DSYL",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 5,
+      "type": "inline",
+      "load": "sync",
+      "hash": "sha256-4RS22DYeB7U14dra4KcQYxmwt5HkOInieXK1NUMBmQI=",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 6,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8080/js/chunk-vendors-legacy.js",
+      "hash": "sha384-epqmwW23YUmAkrPJliuXePB5tMj3SEHEc2GZ4Pi2HCczd2p5ioDJvBN7whkMyfPd",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 7,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8080/js/chunk-common-legacy.js",
+      "hash": "sha384-UUX85QQMyHk8bJvaG42wSBr6qADKqpEfnnSU9Ru2oDVusiA/0cpn+qyVPwYETd+C",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 8,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8080/js/demos-legacy.js",
+      "hash": "sha384-jU1wncWgrjs/6N4fE72hCno+8fobGdAfCJeWWaKgxJTqj1KtiprTG5GuMeax3W5O",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "type": "iframe",
+      "seq": 9,
+      "src_type": "link",
+      "src": "http://localhost:8000/request/sign-transaction/?rpcId=1532214090#confirm-transaction",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "delegate"
+    },
+    {
+      "type": "iframe",
+      "seq": 10,
+      "src_type": "link",
+      "src": "http://localhost:8080/iframe.html",
+      "crossorigin": "",
+      "dynamic": false,
+      "hash": "sha256-9vNL7+UMAC6DndSSnXo86OTRLHovUdNB9P/EEOX8zsI=",
+      "trust": "assert",
+      "manifest": [
+        {
+          "seq": 0,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-vendors.js",
+          "hash": "sha384-3wXwphyCjp+epH8LCtcIne5ymyRakiAa1oizXEibKyMn5UPK2N31xKOfLqijQ7DM",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 1,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-common.js",
+          "hash": "sha384-C7qgMcjg5z4dNx8LUcNPFQ+y5JZwfvMEVlE4EAxnfGeZolmUBGI8S80+jJ9Nz9CZ",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 2,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/iframe.js",
+          "hash": "sha384-k3Pb28GtGnDHLNqVKIPT8do8kS6hAkk2CH0vpWyOLXV9yNNAuh4LTUr+B9uG/OhN",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 3,
+          "type": "inline",
+          "load": "sync",
+          "hash": "sha256-4RS22DYeB7U14dra4KcQYxmwt5HkOInieXK1NUMBmQI=",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 4,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-vendors-legacy.js",
+          "hash": "sha384-epqmwW23YUmAkrPJliuXePB5tMj3SEHEc2GZ4Pi2HCczd2p5ioDJvBN7whkMyfPd",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 5,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-common-legacy.js",
+          "hash": "sha384-UUX85QQMyHk8bJvaG42wSBr6qADKqpEfnnSU9Ru2oDVusiA/0cpn+qyVPwYETd+C",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 6,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/iframe-legacy.js",
+          "hash": "sha384-q5+01wnmU90jk2qeFzIqcXVLQYQDxp95xu4Bc3TAyPXbGsKHhh6cWZ3fnZypeqyM",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        }
+      ]
+    }
+  ]
+}

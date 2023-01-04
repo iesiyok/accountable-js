@@ -1,0 +1,53 @@
+{
+  "name": "Accountable JS",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Prototype tool for accountable javascript",
+  "action": {
+    "default_icon": "img/grey-16.png",
+    "default_popup": "popup/index.html"
+  },
+  "permissions": [
+    "tabs", 
+    "background", 
+    "activeTab",
+    "webRequest",
+    "downloads",
+    "scripting"
+  ],
+  "host_permissions":[
+    "<all_urls>"
+  ],
+  "content_scripts" : [
+   {
+     "js": [
+            "background/consts.js",
+            "content/handlers.js",
+            "content/hardcoded_sri.js",
+            "lib/gen_helper.js", 
+            "ext/crypto-js.js", 
+            "content/helper.js", 
+            "content/struct.js", 
+            "content/active.js", 
+            "content/content.js",
+            "content/links_info.js"
+            
+            
+            
+            
+          ],
+     "run_at": "document_start",
+     "all_frames" : true,
+     "matches": ["<all_urls>"]
+   }
+  ],
+  "background": {
+      "service_worker" : "background.js"             
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' ;  object-src 'self'"
+  },
+  "sandbox": {
+    "pages": ["sandbox.html"]
+  }
+}

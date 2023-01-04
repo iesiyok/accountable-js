@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nimiq Hub Demos</title>
+    <style>
+        body {
+            font-family: 'Muli', system-ui, sans-serif;
+        }
+
+        .request {
+            padding: 0 1em;
+            float: left;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+            padding: 4px 8px;
+            margin: 4px 0;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,600,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono&text=0123456789ABCDEFGHJKLMNPQRSTUVXY">
+</head>
+<body>
+
+<div class="request">
+    <h2>Stored accounts</h2>
+    <br><button id="list-keyguard-keys" disabled>List Keyguard keys in console</button>
+    <br><button id="list-accounts" disabled>Update accounts list</button>
+    <ul id="accounts"></ul>
+</div>
+
+<div class="request">
+    <br>
+    <label style="padding: 1rem 0; cursor: pointer;">Popup <input type="radio" name="popup-vs-redirect" value="popup" checked></label>
+    <label style="padding: 1rem 0; cursor: pointer;"><input type="radio" name="popup-vs-redirect" value="redirect"> Redirect</label>
+
+    <h2>Onboarding</h2>
+    <button id="onboard" disabled>Onboarding Menu</button>
+
+    <h2>Create</h2>
+    <button id="create" disabled>New account</button>
+
+    <h2>Login (Import)</h2>
+    <button id="login" disabled>Login</button>
+
+    <h2>Choose Address</h2>
+    <button id="choose-address" disabled>Choose address</button>
+    <button id="choose-address-and-btc" disabled>Choose address + BTC</button>
+</div>
+
+<div class="request">
+    <h2>Transactions</h2>
+    <div class="row">
+        <label>Keyguard BaseURL</label>
+        <input value="http://localhost:8000/" disabled readonly>
+    </div>
+
+    <div class="row">
+        <label>Transaction value (satoshi)</label>
+        <input id="value" value="545000">
+    </div>
+
+    <div class="row">
+        <label>Transaction fee (satoshi)</label>
+        <input id="fee" value="123">
+    </div>
+
+    <div class="row">
+        <label>Transaction data (ascii)</label>
+        <input id="data" value="Thank you for testing the Nimiq Hub!">
+    </div>
+
+    <div class="row">
+        <label>Validity start height</label>
+        <input id="validitystartheight" type="number" value="176450">
+    </div>
+
+    <label><input type="checkbox" id="checkout-use-selected-address"> Selected Address as Checkout Sender</label>
+    <br><label><input type="checkbox" id="checkout-force-sender"> Force Sender (for NIM Only Checkout)</label>
+    <br><label><input type="checkbox" id="checkout-is-point-of-sale"> Is Point Of Sale Checkout</label>
+    <br><button id="checkout" disabled>Checkout</button>
+    <br><button id="multi-checkout" disabled>Multi Checkout</button>
+    <br><button id="sign-transaction" disabled>Sign Transaction</button>
+</div>
+
+<div class="request">
+    <h2>Sign Message</h2>
+    <div class="row">
+        <label>Message</label>
+        <input id="message" value="Sign me, baby!">
+    </div>
+
+    <br><button id="sign-message" disabled>Sign Message</button>
+    <br><button id="sign-message-with-account" disabled>Sign Message with selected address</button>
+    <br><button id="sign-message-with-tabs" disabled>Sign Message with tabs</button>
+</div>
+
+<div class="request">
+    <h2>Migrate</h2>
+    <br><button id="setup-legacy-accounts" disabled>Setup legacy accounts</button>
+    <br><button id="migrate" disabled>Migrate legacy accounts</button>
+
+    <h2>No request</h2>
+    <a href="/">Go to root without request</a>
+</div>
+
+<div class="request">
+    <h2>Cashlink</h2>
+    <br>
+    <div>
+        <input id="cashlink-use-selected-address" type="checkbox" checked>
+        <label for="cashlink-use-selected-address">Selected address as sender</label>
+    </div>
+    <div>
+        <label for="cashlink-value">Value (optional):</label>
+        <input id="cashlink-value" type="number">
+    </div>
+    <div>
+        <label for="cashlink-message">Message (optional):</label>
+        <input id="cashlink-message">
+    </div>
+    <div>
+        <input id="cashlink-auto-truncate-message" type="checkbox">
+        <label for="cashlink-auto-truncate-message">Auto truncate message</label>
+    </div>
+    <div>
+        <input id="cashlink-return-link" type="checkbox">
+        <label for="cashlink-return-link">Return link</label>
+    </div>
+    <div id="cashlink-skip-sharing-container" style="display: none">
+        <input id="cashlink-skip-sharing" type="checkbox" checked>
+        <label for="cashlink-skip-sharing">Skip sharing</label>
+    </div>
+    <div>
+        <label for="cashlink-theme">Theme</label>
+        <select id="cashlink-theme">
+            <option selected value="">Omitted</option>
+        </select>
+    </div>
+    <br>
+    <button id="create-cashlink">Create Cashlink</button>
+    <ul id="cashlinks"></ul>
+</div>
+
+<div class="request">
+    <h2>Bitcoin</h2>
+    <br>
+    <button id="activate-btc" disabled>Activate BTC</button>
+    <br>
+    <button id="sign-btc-transaction" disabled>Sign BTC Tx</button>
+    <button id="setup-swap" class="nim-to-btc" disabled>Swap NIM -> BTC</button>
+    <button id="setup-swap" class="btc-to-nim" disabled>Swap BTC -> NIM</button>
+</div>
+
+<div class="request">
+    <h2>Result</h2>
+    <p id="result"></p>
+</div>
+
+<!-- needed for Sign Btc Transaction demo -->
+<script defer type="text/javascript"
+    src="/bitcoin/BitcoinJS.min.js"
+    integrity="sha256-mpf6ijUmU2bYEaXt5uB8NAR0fD/eaaX6YtyAPJuX7CY="
+    crossorigin="anonymous"></script>
+<!-- needed for WalletStore in Activate Btc demo -->
+<script defer type="text/javascript"
+    src="https://cdn.nimiq-testnet.com/v1.5.8/web-offline.js"
+    integrity="sha256-iDfmzBmIDoojNYH3IARpHJH1Gm+4hTzmBpTTCwlaj0U="
+    crossorigin="anonymous"></script>
+
+<!-- built files will be auto injected -->
+<script type="module" src="/js/chunk-vendors.js" integrity="sha384-Ce+CRlJNEVysBHJxBNHmaOAAW51obWcd2rDi6vu2zLIngt8mJ76kG+HVpyN/T9sV" defer></script><script type="module" src="/js/chunk-common.js" integrity="sha384-yca5rmx+nKWJPpWWN85fe91jg6/qhTn9KdT2bIvX2o6r1xo1FHkcSunFAn9HMCxR" defer></script><script type="module" src="/js/demos.js" integrity="sha384-ftjZrjFC/Xp1juPJmcQK3hF305fECASRpvs2tcHwAap5zGENZxHCva1qP78vj/ck" defer></script><script>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script><script type="text/javascript" src="/js/chunk-vendors-legacy.js" integrity="sha384-sV2+BcekJg5iW0j4eBqzkU/0oOPfpMaIC3yTVnZFUVBCr6LIYLzTJeeZJj02ZMa7" defer nomodule></script><script type="text/javascript" src="/js/chunk-common-legacy.js" integrity="sha384-sHNyeX8XIlP9oh98hWXpssQRD6n3W3tLOWaGWCbgCYfYjWmZMI62sj7qW+cbOIzA" defer nomodule></script><script type="text/javascript" src="/js/demos-legacy.js" integrity="sha384-7LCeRgESExtojzmml2QiqFnVt/sWJ37e1ydrAKFF85KJt8h4HcGMI5yAFlHj0wW4" defer nomodule></script></body>
+</html>

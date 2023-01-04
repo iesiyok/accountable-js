@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html style=''>
+<head>
+
+	<script type="text/javascript" src="/ext/jquery-2.1.4.min.js">
+	</script>
+
+	<script type="text/javascript" src="/ext/async.min.js">	
+	</script>
+
+	
+
+
+	<style>
+		/*table {
+		  border-collapse: collapse;
+		}
+		tr {
+		    border: 0.5px solid black;
+		}*/
+		.statusTab {
+			font-size:13px; 
+			vertical-align: top;
+			/*word-break: break-word;*/
+			white-space: pre-wrap;
+
+		}
+	</style>
+</head>
+<body >
+	
+	<h3>Javascript transparency tool</h3>
+	<div id="message-area" style="width:600px;">
+		<table style = "table-layout: fixed; width: 590px; border: 0.5px solid black;">
+			<tr class="statusTab">
+				<th>
+					<table>
+						<tr class="statusTab">
+							<td>Status::</td>
+							<td><div id="status_div" >Unknown</div></td>
+						</tr>
+
+					</table>
+				</th>
+			</tr>
+			<tr class="statusTab">
+
+				<td>
+					<div id="measurement_div" ></div>
+				</td>
+			</tr>
+			<tr class="statusTab">
+
+				<td>
+					<div id="warnings_div" ></div>
+				</td>
+			</tr>
+		</table>
+	
+		<table>
+		
+			<tr>
+				<td>
+					<div id="manifest_tool" style="float: right;">
+						<button id="man_gen_btn" disabled="true">Generate Manifest
+						</button>
+						<button id="man_down_btn" disabled="true">Download Manifest
+						</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+	
+	</div>
+	<script type="text/javascript" src='index.js'>
+	</script>
+</body>
+</html>

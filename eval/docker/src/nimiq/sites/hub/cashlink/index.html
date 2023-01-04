@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- Use no custom browser warning share behavior here as cashlink can be opened just fine in other browser. -->
+    <script defer type="text/javascript" src="/browser-warning.js"
+        integrity="sha256-84N1uf7yeFxzXF5lIZaY3LO0b9tBWbdKHqdE9/C8pmQ="
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.nimiq-testnet.com/v1.5.8/web-offline.js"
+        integrity="sha256-iDfmzBmIDoojNYH3IARpHJH1Gm+4hTzmBpTTCwlaj0U="
+        crossorigin="anonymous"></script>
+    <title>Nimiq Cashlink</title>
+
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="Here is your Nimiq Cashlink!">
+
+    <!-- sharing -->
+    <meta name="twitter:image" content="http://localhost:8080/cashlink-icon.png" />
+    <meta name="twitter:author" content="@nimiq" />
+    <meta property="og:image" content="http://localhost:8080/cashlink-icon.png" />
+
+    <link href="/blocking.css" rel="stylesheet">
+    <link rel="icon" href="http://localhost:8080/favicon.ico">
+</head>
+
+<body>
+    <div id="app">
+        <header class="logo">
+            <span class="nq-icon nimiq-logo"></span>
+            <span class="logo-wordmark">Nimiq</span>
+            <span class="logo-subtitle"></span>
+        </header>
+        <div class="loading hide-on-browser-warning">
+            <!-- Loading spinner SVG -->
+            <svg height="48" width="54" color="inherit" class="loading-spinner"><g id="loading-spinner">
+                <path class="big-hex" d="M51.9,21.9L41.3,3.6c-0.8-1.3-2.2-2.1-3.7-2.1H16.4c-1.5,0-2.9,0.8-3.7,2.1L2.1,21.9c-0.8,1.3-0.8,2.9,0,4.2 l10.6,18.3c0.8,1.3,2.2,2.1,3.7,2.1h21.3c1.5,0,2.9-0.8,3.7-2.1l10.6-18.3C52.7,24.8,52.7,23.2,51.9,21.9z" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4" stroke-dasharray="92.5 60"/>
+                <path class="small-hex" d="M51.9,21.9L41.3,3.6c-0.8-1.3-2.2-2.1-3.7-2.1H16.4c-1.5,0-2.9,0.8-3.7,2.1L2.1,21.9c-0.8,1.3-0.8,2.9,0,4.2 l10.6,18.3c0.8,1.3,2.2,2.1,3.7,2.1h21.3c1.5,0,2.9-0.8,3.7-2.1l10.6-18.3C52.7,24.8,52.7,23.2,51.9,21.9z" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="47.5 105"/>
+            </g></svg>
+        </div>
+    </div>
+    <noscript id="browser-warning-container">
+    <div id="browser-warning">
+        <h1 id="browser-warning-headline">Please enable JavaScript</h1>
+        <div id="browser-warning-message">
+            We're sorry, but this app doesn't work properly without JavaScript enabled. Please enable it to continue.
+        </div>
+    </div>
+    <style>.hide-on-browser-warning{display:none!important}</style>
+</noscript>
+
+    <!-- built files will be auto injected -->
+<script type="module" src="/js/chunk-vendors.js" integrity="sha384-Ce+CRlJNEVysBHJxBNHmaOAAW51obWcd2rDi6vu2zLIngt8mJ76kG+HVpyN/T9sV" defer></script><script type="module" src="/js/chunk-common.js" integrity="sha384-yca5rmx+nKWJPpWWN85fe91jg6/qhTn9KdT2bIvX2o6r1xo1FHkcSunFAn9HMCxR" defer></script><script type="module" src="/js/cashlink-app.js" integrity="sha384-flTc6OveNw41yHVcfiBZq6svmEfYP1Dqlp/ygX04nDjO6tN17P6R3PBSQauQ8qid" defer></script><script>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()},!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script><script type="text/javascript" src="/js/chunk-vendors-legacy.js" integrity="sha384-sV2+BcekJg5iW0j4eBqzkU/0oOPfpMaIC3yTVnZFUVBCr6LIYLzTJeeZJj02ZMa7" defer nomodule></script><script type="text/javascript" src="/js/chunk-common-legacy.js" integrity="sha384-sHNyeX8XIlP9oh98hWXpssQRD6n3W3tLOWaGWCbgCYfYjWmZMI62sj7qW+cbOIzA" defer nomodule></script><script type="text/javascript" src="/js/cashlink-app-legacy.js" integrity="sha384-MpX+M7UejsP1NK1vhdanD5uHlqJVHtOQz6kPpPBsLjnLPIiGjvrUGZCWQg12sVCC" defer nomodule></script></body>
+</html>

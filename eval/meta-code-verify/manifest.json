@@ -1,0 +1,48 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "default_64@2x.png",
+         "32": "default_32.png",
+         "64": "default_64.png"
+      },
+      "default_popup": "loading.html",
+      "default_title": "Code Verify"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "contentMSGR.js" ],
+      "matches": [ "*://*.messenger.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "exclude_matches": [ "*://*.facebook.com/settings/*", "*://*.facebook.com/games/*", "*://*.facebook.com/gaming/games/*", "*://*.facebook.com/you/sales/confirm_identity", "*://*.facebook.com/donate/*", "*://*.facebook.com/sharer/sharer.php*", "*://*.facebook.com/sharer.php*" ],
+      "js": [ "contentFB.js" ],
+      "match_about_blank": true,
+      "matches": [ "*://*.facebook.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "exclude_matches": [ "*://www.whatsapp.com/", "*://*.whatsapp.com/bt-manifest/*" ],
+      "js": [ "contentWA.js" ],
+      "match_about_blank": true,
+      "matches": [ "*://*.whatsapp.com/*" ],
+      "run_at": "document_start"
+   } ],
+   "default_locale": "en",
+   "description": "An extension to verify the code running in your browser matches what was published.",
+   "host_permissions": [ "https://*.privacy-auditability.cloudflare.com/", "https://web.whatsapp.com/" ],
+   "icons": {
+      "128": "default_64@2x.png",
+      "32": "default_32.png",
+      "64": "default_64.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkZ/3xdoZCMDHz1fnYpox2ruW7qK6nQlkWPYLG1tr+4Z0yigEIIQpfZfPuEZZjKdwODImazOBxDf3ZuW9/aXI5MMGsMFuEi3ae7BZJFdX7sBtu4mAcYu0pkD9y56j99vxNdBk+DvHL/5ylRnS8fBZeKUVG+/N7jxnczY9r75c6Ci8B6tvrQckvrLIOISk/QH8E2alsncaJY45CW8+E1a0w0XXA1GqxIpIKQOK7L1ZHl9p6L38Hu6Vt1OfgOKTaMop49RkLLuGuZW+zgVhriQgaUG5mVoTmkJw5pu5iaF3xtqB6LbJwKoQlZAH2X5zOXuuuIkAsdAEYflAb6AXTzDV8wIDAQAB",
+   "manifest_version": 3,
+   "name": "Code Verify",
+   "permissions": [ "tabs", "webRequest" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.0.1"
+}

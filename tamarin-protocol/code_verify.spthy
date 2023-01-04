@@ -1,0 +1,226 @@
+theory CodeVerify
+begin
+
+builtins: multiset, hashing
+
+functions: 
+    h/1, true/0, eq/2,
+    pk/1, sk/1[private],
+    sign/2, verify/3[destructor],
+    chan/2[private]
+
+equations: 
+    verify(pk(sk(i)), sign(sk(i), m), m ) = true
+
+predicates: HonestRun() <=> not (Ex p #j. Corrupted(p)@j)
+
+options: asynchronous-channels
+
+export queries:
+"
+set preciseActions = true.
+"
+
+restriction parties_unique:
+    "All p #i #j. Party(p)@i & Party(p)@j 
+        ==> #i=#j"
+
+
+
+let Developer = (
+
+    ((
+        event Corrupted('D');
+        out(sk('D'))
+    )
+    |
+    out(pk(sk('D')))
+    | (
+            in(<$content, $v>);
+            if $content = 'malicious' then 0
+            else (
+                event DUploads(< $content, $v, h($content)>);
+                let mUpdate = <'update', h($content), $v > in
+                
+                out(<mUpdate, sign(sk('D'), mUpdate)>); 
+                in(<'updateNote', =mUpdate, cf_sign>);
+                if verify(pk(sk('CF')), cf_sign, sign(sk('D'), mUpdate) )=true() then 
+                    let codeUpdate = <'updateCode', $content, $v > in
+                    out(<codeUpdate, sign(sk('D'), codeUpdate)> )
+            )
+       )
+    )
+
+)
+
+let CloudFlare =
+(
+    
+    ((
+        event Corrupted('CF'); 
+        out(sk('CF')) 
+    )
+    |
+    out(pk(sk('CF')))
+    | (
+            in(<mUpdate, sigmUpdate>);
+            let <'update', hash_content, $v>=mUpdate in
+            if verify(pk(sk('D')), sigmUpdate, mUpdate)=true() then 
+                event HashUpdated(<$v, hash_content>);
+                let cf_sign = sign(sk('CF'), sigmUpdate ) in
+                out(<'updateNote', mUpdate, cf_sign >);
+                !(
+                    in(chan($C,'CF'),<'hashRequest', $C, =$v>);
+                    //let hashResp = <'hashResponse', $C, hash_content, $v> in
+                    event HashResponse(<$C, $v, hash_content>);
+                    out(chan($C,'CF'),<'hashResponse', $C, hash_content, $v>)
+                )        
+    ))
+)
+
+let Webserver =
+(
+    
+    ((
+        event Corrupted('W'); 
+        out(sk('W'));
+        !(in($C); out(chan($C,'W')))
+    )
+    |
+    out(pk(sk('W')))
+    | ( 
+            in(<codeUpdate, sigCodeUpdate>);
+            let <'updateCode', $content, $v>= codeUpdate in
+            if verify(pk(sk('D')), sigCodeUpdate, codeUpdate )=true() then
+                event CodeUpdated(<$content, $v>);
+                !(
+                    in(chan($C,'W'),<'httpRequest', $C>);
+                    //let resp = <'httpResponse', $content, $v> in
+                    event WResponseSent(< $C, $content, $v >);
+                    //out(<resp, sign(sk('W'), resp) >)
+                    out(chan($C,'W'),<'httpResponse', $content, $v>)
+                )
+        
+    ))
+)
+
+let Client  =
+(
+    in($C);
+    event Party($C);
+    ((
+        event Corrupted($C); 
+        out(sk('C',$C));
+        out(chan($C,'W'))
+    )
+    |
+    out(pk(sk('C',$C)))
+    | (
+        out(chan($C,'W'),<'httpRequest', $C>);
+        in(chan($C,'W'),<'httpResponse', $content, $v >);
+
+        out(chan($C,'CF'),<'hashRequest', $C, $v >);
+        in(chan($C,'CF'),<'hashResponse', =$C, hash_content, =$v>);
+
+        if  hash_content = h($content) then
+            event CodeVerified(< $C, $content, $v, hash_content>);
+            let evidence = <$C, $content, $v, hash_content > in
+            
+            out(<evidence, sign(sk('C', $C), evidence)>)
+
+
+    ))
+)
+
+let Pub =
+(
+    
+    in(<evidence, sigEvidence>);
+    let < $C, $content, $v, hash_content >= evidence in
+    if ( verify(pk(sk('C', $C)), sigEvidence, evidence )=true() & 
+                hash_content = h($content) ) then
+
+        event PAccepts(<$C, $content, $v,  hash_content >)
+)
+
+
+// Reactivated: we need this because otherwise chan(..) forces partial reconstructions
+// verified
+lemma hash_resp_provide [sources]:
+    "
+    All c v hsh #i. HashResponse(<c,v,hsh>)@i ==>
+        ((Ex #j. KU(hsh)@j & j<i ) | (Ex #j. HashUpdated(<v,hsh>)@j & j<i  ))
+    "
+
+//auto
+lemma sanity[output=[spthy]]: 
+     exists-trace
+      "Ex c  #i. CodeVerified(c)@i & HonestRun()"
+
+// verifies ~1min
+lemma auth_of_origin:
+    " All c v con hsh #i. CodeVerified(<c, con, v, hsh>)@i 
+        ==>  (
+                (Ex #j. DUploads(<con, v, hsh>)@j) |
+                (Ex #k #l #m. Corrupted('D')@k & KU(v)@l & KU(con)@m )  |
+                (Ex #k . Corrupted('CF')@k  )   
+            )
+        "
+
+
+// counterexample, but transparency does not make sense for codeverify anyway
+//(TODO see what we want here --- maybe we don't have transparency. at least there's no public log.)
+/* lemma transparency: */
+/*     " All c v con hsh #i. CodeVerified(<c, con, v, hsh>)@i */
+/*         ==> ((Ex #j #l. WResponseSent(<c, con, v>)@j & HashResponse(<c, v, hsh>)@l) */
+/*             | (Ex #k. Corrupted('W')@k) */
+/*             | (Ex #j . Corrupted('CF')@j  ) */   
+/*             ) */
+/*         " */
+
+// corrupting D is necessary to distribute malicious code, 
+// auto <1min
+lemma e2eguarantee:
+    " All c v hsh #i. CodeVerified(<c, 'malicious', v, hsh>)@i
+        ==> (Ex #k. Corrupted('D')@k)
+            | (Ex #k . Corrupted('CF')@k  )   
+        "
+
+// auto, quick
+// corrupting D is sufficient to distribute malicious code
+lemma e2eNonguarantee:
+    exists-trace
+    " Ex c v hsh #i. CodeVerified(< c, 'malicious', v, hsh>)@i
+      & (All #k x. Corrupted(x)@k ==> (x = 'D' ))
+        "
+
+// auto, quick 
+// non-accountability.
+// The client can fake the public's information, as the TLS channels does not
+// provide non-repudiation
+lemma public_accept_claim_only_if_W_sent:
+    exists-trace
+    "
+    not(
+        All c v con hsh #i . PAccepts(<c,con,v,hsh>)@i 
+
+                ==>  (( Ex #j. WResponseSent(<c, con, v>)@j & j <i )
+                | (Ex #m. Corrupted('W')@m & m < i) 
+                | (Ex #m. Corrupted('CF')@m & m < i) 
+                      ))
+    " 
+
+process:
+    !Developer | !Webserver | !CloudFlare |  !Client | Pub 
+
+end
+
+
+end
+
+  /* hash_resp_provide (all-traces): verified (49 steps) */
+  /* sanity (exists-trace): verified (9 steps) */
+  /* auth_of_origin (all-traces): verified (774 steps) */
+  /* e2eguarantee (all-traces): verified (630 steps) */
+  /* e2eNonguarantee (exists-trace): verified (7 steps) */
+  /* public_accept_claim_only_if_W_sent (exists-trace): verified (6 steps) */

@@ -1,0 +1,51 @@
+{
+  "url": "http://localhost:8000/request/iframe/index.html",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+            {
+              "seq": 0,
+              "type": "external",
+              "name": "",
+              "version": "",
+              "link": "http://localhost:8000/assets/nimiq/web-offline.js",
+              "hash": "sha256-iDfmzBmIDoojNYH3IARpHJH1Gm+4hTzmBpTTCwlaj0U=",
+              "crossorigin": null,
+              "load": "defer",
+              "dynamic": false,
+              "trust": "assert"
+            },
+            {
+              "seq": 1,
+              "type": "external",
+              "name": "",
+              "version": "",
+              "link": "http://localhost:8000/request/common.77c736d1.js",
+              "hash": "sha256-d8c20Uxsv4O+XggeyzifKxmRsz2PJJeJdByNaD41wX0=",
+              "crossorigin": null,
+              "load": "defer",
+              "dynamic": false,
+              "trust": "assert"
+            },
+            {
+              "seq": 2,
+              "type": "external",
+              "name": "",
+              "version": "",
+              "link": "http://localhost:8000/request/iframe/index.d4052e08.js",
+              "hash": "sha256-1AUuCPhYFp4BUczH+TKvH87/GJZdLJSnGLMEp72wKRQ=",
+              "crossorigin": null,
+              "load": "defer",
+              "dynamic": false,
+              "trust": "assert"
+            }
+    
+
+  ]
+}
+
+
+
+            
+          

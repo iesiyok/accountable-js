@@ -1,0 +1,19 @@
+{
+  "name": "automated-eval",
+  "version": "1.0.0",
+  "description": "",
+  "main": "eval.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "child-process": "^1.0.2",
+    "lighthouse": "^9.6.8",
+    "puppeteer": "^19.3.0"
+  },
+  "dependencies": {
+    "lighthouse-ci": "^1.13.1"
+  }
+}

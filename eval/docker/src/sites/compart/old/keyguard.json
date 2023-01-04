@@ -1,0 +1,68 @@
+{
+  "url": "http://localhost:8000/request/sign-transaction/",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8000/assets/nimiq/web-offline.js",
+      "hash": "sha256-L8NMxOGkIWRBeh2LEIFI4sUq0m+m5sIuBWZZytKNSBA=",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 1,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8000/request/common.df46c9dd.js",
+      "hash": "sha256-30bJ3ZV8nmbazd1XjVjLC/hc+jGzw+tcNx6OtHEPR2A=",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 2,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8000/request/toplevel.73f11818.js",
+      "hash": "sha256-c/EYGEpxyOnIJ8Zo176aDhwHke/xWsBv4J9yQmestgA=",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 3,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8000/request/sign-transaction/index.e31650b1.js",
+      "hash": "sha256-4xZQsTbSh8+LVwI2tFbyD4Pmh+P83ap+/ASkd4GiLDE=",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 4,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8000/assets/nimiq/worker-wasm.js",
+      "hash": "sha256-1h3wGtySfLKDIxTvVjS56pcJKsrLCb63YosamKCWLHA=",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": false,
+      "trust": "assert"
+    }
+  ]
+}

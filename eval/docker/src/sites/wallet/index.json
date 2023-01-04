@@ -1,0 +1,231 @@
+{
+  "url": "http://localhost:8081/",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8081/js/chunk-vendors.js",
+      "hash": "sha384-KKTuJ17ffGwUmGzZUMFirMmsSoPr+YwAnSpLPdW8trogd6RJRqp1kwte5FzJzs4V",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 1,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8081/js/chunk-common.js",
+      "hash": "sha384-OKW+j7fyEx2YK7jpcy+nvwETqJNpfuwU4nwSki+bCMzY92Gzfqsm/5/NFGuAAmRq",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 2,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8081/js/index.js",
+      "hash": "sha384-4vjzuPT6KRaGapisjoLCNJWHOUxEhVSLuYoPZ2m6vRXz7ihtSWZPV/9a9+9RGuIB",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 3,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8081/js/lang-en-po.js",
+      "hash": "sha256-0Rl9pC1Bt38w/HauL7iHDxslxJCRIKvVCz766BP9Fs4=",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    },
+    {
+      "seq": 4,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://cdn.nimiq-testnet.com/v1.5.8/worker-wasm.js",
+      "hash": "sha384-vPGmIOWL+28LrfevYCeesXx812OPughISV1aTevMDMo9n61PjRZL8bzhLXt44YvZ",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    },
+    {
+      "type": "iframe",
+      "seq": 5,
+      "src_type": "link",
+      "src": "http://localhost:8080/iframe.html",
+      "crossorigin": "",
+      "dynamic": true,
+      "persistent": false,
+      "trust": "assert",
+      "manifest": [
+        {
+          "seq": 0,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-vendors.js",
+          "hash": "sha384-Ce+CRlJNEVysBHJxBNHmaOAAW51obWcd2rDi6vu2zLIngt8mJ76kG+HVpyN/T9sV",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 1,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-common.js",
+          "hash": "sha384-yca5rmx+nKWJPpWWN85fe91jg6/qhTn9KdT2bIvX2o6r1xo1FHkcSunFAn9HMCxR",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 2,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/iframe.js",
+          "hash": "sha384-8B8MCEBXyTdRhBTCXckWwqju44mzQsmzeGXNXhq8dNik/JfJGe/OtAUr064f98Ru",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 3,
+          "type": "inline",
+          "load": "sync",
+          "hash": "sha256-4RS22DYeB7U14dra4KcQYxmwt5HkOInieXK1NUMBmQI=",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 4,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-vendors-legacy.js",
+          "hash": "sha384-sV2+BcekJg5iW0j4eBqzkU/0oOPfpMaIC3yTVnZFUVBCr6LIYLzTJeeZJj02ZMa7",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 5,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/chunk-common-legacy.js",
+          "hash": "sha384-sHNyeX8XIlP9oh98hWXpssQRD6n3W3tLOWaGWCbgCYfYjWmZMI62sj7qW+cbOIzA",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "seq": 6,
+          "type": "external",
+          "name": "",
+          "version": "",
+          "link": "http://localhost:8080/js/iframe-legacy.js",
+          "hash": "sha384-Z6FvJD3aeeZ2K8hqkREHcUuKzfMTfuk9gtIblbAUSIlC2wNnyCDrm1Q63cHgE05R",
+          "crossorigin": null,
+          "load": "defer",
+          "dynamic": false,
+          "trust": "assert"
+        },
+        {
+          "type": "iframe",
+          "seq": 7,
+          "src_type": "link",
+          "src": "http://localhost:8000/request/iframe/index.html",
+          "crossorigin": "",
+          "dynamic": true,
+          "trust": "assert",
+          "manifest": [
+            {
+              "seq": 0,
+              "type": "external",
+              "name": "",
+              "version": "",
+              "link": "http://localhost:8000/assets/nimiq/web-offline.js",
+              "hash": "sha256-iDfmzBmIDoojNYH3IARpHJH1Gm+4hTzmBpTTCwlaj0U=",
+              "crossorigin": null,
+              "load": "defer",
+              "dynamic": false,
+              "trust": "assert"
+            },
+            {
+              "seq": 1,
+              "type": "external",
+              "name": "",
+              "version": "",
+              "link": "http://localhost:8000/request/common.77c736d1.js",
+              "hash": "sha256-d8c20Uxsv4O+XggeyzifKxmRsz2PJJeJdByNaD41wX0=",
+              "crossorigin": null,
+              "load": "defer",
+              "dynamic": false,
+              "trust": "assert"
+            },
+            {
+              "seq": 2,
+              "type": "external",
+              "name": "",
+              "version": "",
+              "link": "http://localhost:8000/request/iframe/index.d4052e08.js",
+              "hash": "sha256-1AUuCPhYFp4BUczH+TKvH87/GJZdLJSnGLMEp72wKRQ=",
+              "crossorigin": null,
+              "load": "defer",
+              "dynamic": false,
+              "trust": "assert"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seq": 6,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://cdn.nimiq-testnet.com/v1.5.8/web.js",
+      "hash": "sha384-GEJvVfcMUiSoLrfgRSVj435QR6iFP454dlCnMuiTQABraXrcUQB1eft+q2+byJaU",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    },
+    {
+      "seq": 7,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "http://localhost:8081/bitcoin/BitcoinJS.min.js",
+      "hash": "sha384-InTmSE4CheiwuiF+i2DHRMZIBZ8lulBS52s0W2QpKqwOsdPfiXLgzXzJC0ONsupD",
+      "crossorigin": "anonymous",
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    }
+  ]
+}

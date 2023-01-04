@@ -1,0 +1,336 @@
+.download-loginfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    outline: none;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.download-loginfile .loginfile-link {
+    position: relative;
+    flex-grow: 1;
+    min-height: 30rem;
+    max-height: 40rem;
+}
+
+.download-loginfile .loginfile {
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.download-loginfile .long-touch-indicator {
+    width: 11rem;
+    height: 11rem;
+    position: absolute;
+    left: calc(50% - 5.5rem);
+    top: 25.5rem; /* To lie over the wallet indicator on the Login File*/
+    pointer-events: none;
+    display: none;
+    stroke: white;
+}
+
+.download-loginfile .long-touch-indicator.animate {
+    /* The animation duration is not 800ms like the LONG_TOUCH_DURATION,
+       because testing revealed that then the indicator does not fill
+       up completely. With 700ms it fills up completely when the
+       pop-up menu is shown. */
+    animation: long-touch-indicator-animation 700ms linear forwards;
+}
+
+@keyframes long-touch-indicator-animation {
+    from {
+        stroke-dashoffset: 100.5;
+        stroke: rgba(255, 255, 255, 0.6);
+    }
+}
+
+.download-loginfile .loginfile-description {
+    font-size: 2rem;
+    margin: 3rem 0 0;
+}
+
+.download-loginfile .loginfile-description:not(.visible) {
+    display: none;
+}
+
+.download-loginfile .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.download-loginfile .nq-button {
+    margin-top: 3rem;
+    margin-bottom: 0;
+}
+
+.download-loginfile .download-button {
+    min-width: 0;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    padding-left: 3rem;
+}
+
+.download-loginfile .download-button > .nq-icon {
+    margin-right: 1.5rem;
+    font-size: 2.5rem;
+}
+
+.download-loginfile.maybe-downloaded .download-button {
+    padding: 0 1rem 0 2.5rem;
+    background: rgba(31, 35, 72, .07);
+    color: var(--nimiq-blue);
+    box-shadow: none;
+    transform: none;
+    transition: background 0.3s var(--nimiq-ease);
+}
+
+.download-loginfile.maybe-downloaded .download-button::before {
+    display: none;
+}
+
+.download-loginfile.maybe-downloaded .download-button:hover,
+.download-loginfile.maybe-downloaded .download-button:focus {
+    background: rgba(31, 35, 72, .12);
+}
+
+.download-loginfile .continue {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    margin-left: 1rem;
+    flex-shrink: 0;
+    padding-right: 2.25rem;
+}
+
+.download-loginfile:not(.maybe-downloaded) .continue {
+    padding-left: 2.25rem;
+}
+
+.download-loginfile .continue > span {
+    margin-right: 1rem;
+}
+
+.download-loginfile .continue > .nq-icon {
+    margin-right: 0.5rem; /* To visually center the icon, which itself has more space on the left than on the right */
+    font-size: 2.5rem;
+}
+
+.download-loginfile:not(.fallback-download) .tap-and-hold,
+.download-loginfile.fallback-download .download-button,
+.download-loginfile:not(.maybe-downloaded) .continue > span,
+.download-loginfile.maybe-downloaded .download-button > span {
+    display: none;
+}
+
+.download-loginfile .tap-and-hold {
+    text-align: center;
+    margin: 3rem 1rem 0 auto;
+    font-size: 2rem;
+    line-height: 1.25;
+    color: rgba(31, 35, 72, .5) !important; /* important is necessary for iOS to overwrite <a> colors; based on Nimiq Blue */
+    white-space: pre-line;
+}
+
+.login-file-icon {
+    width: 12rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1rem;
+    border: 2px dashed rgba(31, 35, 72, 0.4); /* based on Nimiq Blue */
+}
+
+.login-file-icon.locked,
+.login-file-icon.file-unavailable {
+    border: 0px;
+}
+
+.login-file-icon .lock {
+    display: flex;
+    width: 4.125rem;
+    height: 5.75rem;
+    margin-top: 3rem;
+    opacity: 0.4;
+}
+
+.login-file-icon:not(.locked) .lock-locked,
+.login-file-icon.locked .lock-unlocked {
+    display: none;
+}
+
+.login-file-icon.locked .lock {
+    opacity: 1;
+    color: white;
+}
+
+.login-file-icon.file-unavailable.locked .lock {
+    opacity: 0.7;
+    color: inherit;
+}
+
+.login-file-icon .qr-code {
+    display: flex;
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 2.25rem;
+    opacity: 0.4;
+}
+
+.login-file-icon.locked .qr-code {
+    opacity: 0.6;
+    color: white;
+}
+.login-file-icon.file-unavailable .qr-code {
+    visibility: hidden;
+}
+.progress-indicator {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.progress-indicator .indicator {
+    flex-grow: 1;
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    background: var(--nimiq-blue);
+    margin: 0.5rem;
+    opacity: 0.1;
+}
+
+.nq-blue-bg .progress-indicator .indicator {
+    background: white;
+    opacity: 0.25;
+}
+
+.nq-card-header .progress-indicator ~ *:not(.nq-notice) {
+    margin-top: 1rem;
+}
+
+.progress-indicator[data-step="1"] .step-1,
+.progress-indicator[data-step="2"] .step-1,
+.progress-indicator[data-step="3"] .step-1,
+.progress-indicator[data-step="4"] .step-1,
+.progress-indicator[data-step="5"] .step-1,
+.progress-indicator[data-step="6"] .step-1,
+.progress-indicator[data-step="7"] .step-1,
+.progress-indicator[data-step="8"] .step-1,
+.progress-indicator[data-step="9"] .step-1,
+
+.progress-indicator[data-step="2"] .step-2,
+.progress-indicator[data-step="3"] .step-2,
+.progress-indicator[data-step="4"] .step-2,
+.progress-indicator[data-step="5"] .step-2,
+.progress-indicator[data-step="6"] .step-2,
+.progress-indicator[data-step="7"] .step-2,
+.progress-indicator[data-step="8"] .step-2,
+.progress-indicator[data-step="9"] .step-2,
+
+.progress-indicator[data-step="3"] .step-3,
+.progress-indicator[data-step="4"] .step-3,
+.progress-indicator[data-step="5"] .step-3,
+.progress-indicator[data-step="6"] .step-3,
+.progress-indicator[data-step="7"] .step-3,
+.progress-indicator[data-step="8"] .step-3,
+.progress-indicator[data-step="9"] .step-3,
+
+.progress-indicator[data-step="4"] .step-4,
+.progress-indicator[data-step="5"] .step-4,
+.progress-indicator[data-step="6"] .step-4,
+.progress-indicator[data-step="7"] .step-4,
+.progress-indicator[data-step="8"] .step-4,
+.progress-indicator[data-step="9"] .step-4,
+
+.progress-indicator[data-step="5"] .step-5,
+.progress-indicator[data-step="6"] .step-5,
+.progress-indicator[data-step="7"] .step-5,
+.progress-indicator[data-step="8"] .step-5,
+.progress-indicator[data-step="9"] .step-5,
+
+.progress-indicator[data-step="6"] .step-6,
+.progress-indicator[data-step="7"] .step-6,
+.progress-indicator[data-step="8"] .step-6,
+.progress-indicator[data-step="9"] .step-6,
+
+.progress-indicator[data-step="7"] .step-7,
+.progress-indicator[data-step="8"] .step-7,
+.progress-indicator[data-step="9"] .step-7,
+
+.progress-indicator[data-step="8"] .step-8,
+.progress-indicator[data-step="9"] .step-8,
+
+.progress-indicator[data-step="9"] .step-9 {
+    background: var(--nimiq-green);
+    opacity: 1;
+}
+.page#enter-password .page-header {
+    padding-bottom: 3rem;
+}
+
+.page#enter-password .page-header h1 {
+    /* give long translations a bit more space */
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
+.page#enter-password .page-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page#enter-password .row {
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+    font-size: 2rem;
+    line-height: 2.75rem;
+}
+
+.page#enter-password .row:not(:first-child) {
+    margin-top: 3rem;
+}
+
+.page#enter-password .row .nq-icon {
+    margin-right: 2rem;
+    width: 4.875rem;
+    height: 4.875rem;
+    opacity: 0.4;
+    flex-shrink: 0;
+}
+
+.page#set-password .page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.page#download-file .page-header {
+    padding-bottom: 3rem;
+}
+
+.page#download-file .page-body {
+    display: flex;
+}
+
+.page#download-file .skip {
+    margin-top: -3rem;
+}
+
+#app:not(.legacy-key) .legacy,
+#app.legacy-key .warning:not(.legacy),
+#app.legacy-key .info:not(.legacy) {
+     display: none;
+}

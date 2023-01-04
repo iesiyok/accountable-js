@@ -1,0 +1,1 @@
+add_header content-security-policy "default-src 'self';script-src 'self' 'strict-dynamic' 'sha256-v24ShkcPAL7Aa31ff6YPQABnrqtKa2dbchg1E57tSrc=' ;child-src http://localhost:8081/";

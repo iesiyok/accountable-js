@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' 'unsafe-eval';
+          img-src http: https: blob: data:;
+          child-src 'self' blob:;
+          style-src 'self';
+          font-src 'self';">
+    <title>Nimiq Keyguard</title>
+
+    <script defer src="/assets/nimiq/web-offline.js" integrity="sha256-iDfmzBmIDoojNYH3IARpHJH1Gm+4hTzmBpTTCwlaj0U="></script>
+    <script defer src="/request/common.77c736d1.js" integrity="sha256-d8c20Uxsv4O+XggeyzifKxmRsz2PJJeJdByNaD41wX0="></script>
+    <script defer src="/request/toplevel.b7c156ac.js" integrity="sha256-t8FWrGJ/vYoguNfJcFi2LRMegBY4azL7pOOhjyGbvgc="></script>
+    <script defer src="/request/sign-message/index.cfee7031.js" integrity="sha256-z+5wMepOM7QRA9j88XTppNuH5+rZx5hxE7SfjBouC+k="></script>
+
+
+
+
+    <link rel="stylesheet" href="/request/toplevel.a4cf8ba9.css" integrity="sha256-pM+LqeaY9tqh2VhlVTpiwiaQtIHnZNlpbY0UKE5Tsgo=">
+    <link rel="stylesheet" href="/request/sign-message/index.b5580193.css" integrity="sha256-tVgBk6+7O25IOx49F4Td9WkQda7Iwtq3BMYLwI1x0Sg=">
+
+</head>
+<body class="loading">
+    <div class="header-top">
+        <div class="nimiq-app-name">
+            <span class="nimiq-logo"></span>
+        </div>
+    </div>
+
+    <div id="app">
+        <div id="sign-message" class="page nq-card">
+            <div class="page-header nq-card-header">
+                <h1 data-i18n="sign-msg-heading" class="nq-h1">Sign Message</h1>
+            </div>
+
+            <div class="page-body nq-card-body">
+                <textarea id="message" readonly="readonly"></textarea>
+                <div class="tab-width">
+                    <div id="tab-width-selector"></div>
+                </div>
+
+                <div class="account">
+                    <div class="identicon" id="signer-identicon"></div>
+                    <div class="account-text">
+                        <div class="label" id="signer-label"></div>
+                        <span class="label-right" data-i18n="sign-msg-signer">Signer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer nq-card-footer">
+                <form id="password-box"></form>
+            </div>
+        </div>
+
+        <button class="global-close nq-button-s display-none">
+            <svg class="nq-icon"><use xlink:href="/assets/nimiq-style.icons.svg#nq-arrow-left-small"/></svg>
+            <span id="global-close-text"></span>
+        </button>
+
+        <!-- Default and loading screen -->
+        <div id="loading" class="page">
+            <!-- Loading spinner SVG -->
+            <svg height="48" width="54" color="inherit" class="loading-spinner"><g>
+                <path class="big-hex" d="M51.9,21.9L41.3,3.6c-0.8-1.3-2.2-2.1-3.7-2.1H16.4c-1.5,0-2.9,0.8-3.7,2.1L2.1,21.9c-0.8,1.3-0.8,2.9,0,4.2 l10.6,18.3c0.8,1.3,2.2,2.1,3.7,2.1h21.3c1.5,0,2.9-0.8,3.7-2.1l10.6-18.3C52.7,24.8,52.7,23.2,51.9,21.9z" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4" stroke-dasharray="92.5 60"/>
+                <path class="small-hex" d="M51.9,21.9L41.3,3.6c-0.8-1.3-2.2-2.1-3.7-2.1H16.4c-1.5,0-2.9,0.8-3.7,2.1L2.1,21.9c-0.8,1.3-0.8,2.9,0,4.2 l10.6,18.3c0.8,1.3,2.2,2.1,3.7,2.1h21.3c1.5,0,2.9-0.8,3.7-2.1l10.6-18.3C52.7,24.8,52.7,23.2,51.9,21.9z" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="47.5 105"/>
+            </g></svg>
+        </div>
+    </div>
+</body>
+</html>

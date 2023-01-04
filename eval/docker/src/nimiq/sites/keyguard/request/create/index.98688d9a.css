@@ -1,0 +1,737 @@
+.progress-indicator {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.progress-indicator .indicator {
+    flex-grow: 1;
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    background: var(--nimiq-blue);
+    margin: 0.5rem;
+    opacity: 0.1;
+}
+
+.nq-blue-bg .progress-indicator .indicator {
+    background: white;
+    opacity: 0.25;
+}
+
+.nq-card-header .progress-indicator ~ *:not(.nq-notice) {
+    margin-top: 1rem;
+}
+
+.progress-indicator[data-step="1"] .step-1,
+.progress-indicator[data-step="2"] .step-1,
+.progress-indicator[data-step="3"] .step-1,
+.progress-indicator[data-step="4"] .step-1,
+.progress-indicator[data-step="5"] .step-1,
+.progress-indicator[data-step="6"] .step-1,
+.progress-indicator[data-step="7"] .step-1,
+.progress-indicator[data-step="8"] .step-1,
+.progress-indicator[data-step="9"] .step-1,
+
+.progress-indicator[data-step="2"] .step-2,
+.progress-indicator[data-step="3"] .step-2,
+.progress-indicator[data-step="4"] .step-2,
+.progress-indicator[data-step="5"] .step-2,
+.progress-indicator[data-step="6"] .step-2,
+.progress-indicator[data-step="7"] .step-2,
+.progress-indicator[data-step="8"] .step-2,
+.progress-indicator[data-step="9"] .step-2,
+
+.progress-indicator[data-step="3"] .step-3,
+.progress-indicator[data-step="4"] .step-3,
+.progress-indicator[data-step="5"] .step-3,
+.progress-indicator[data-step="6"] .step-3,
+.progress-indicator[data-step="7"] .step-3,
+.progress-indicator[data-step="8"] .step-3,
+.progress-indicator[data-step="9"] .step-3,
+
+.progress-indicator[data-step="4"] .step-4,
+.progress-indicator[data-step="5"] .step-4,
+.progress-indicator[data-step="6"] .step-4,
+.progress-indicator[data-step="7"] .step-4,
+.progress-indicator[data-step="8"] .step-4,
+.progress-indicator[data-step="9"] .step-4,
+
+.progress-indicator[data-step="5"] .step-5,
+.progress-indicator[data-step="6"] .step-5,
+.progress-indicator[data-step="7"] .step-5,
+.progress-indicator[data-step="8"] .step-5,
+.progress-indicator[data-step="9"] .step-5,
+
+.progress-indicator[data-step="6"] .step-6,
+.progress-indicator[data-step="7"] .step-6,
+.progress-indicator[data-step="8"] .step-6,
+.progress-indicator[data-step="9"] .step-6,
+
+.progress-indicator[data-step="7"] .step-7,
+.progress-indicator[data-step="8"] .step-7,
+.progress-indicator[data-step="9"] .step-7,
+
+.progress-indicator[data-step="8"] .step-8,
+.progress-indicator[data-step="9"] .step-8,
+
+.progress-indicator[data-step="9"] .step-9 {
+    background: var(--nimiq-green);
+    opacity: 1;
+}
+.overlay-container {
+    --transition-time: 0.75s;
+    --overlay-transition-time: 0.65s;
+    position: relative;
+    width: 100%;
+    max-width: 56.5rem; /* 420px + 2 * 2rem because of .nq-card margin*/
+    height: 70.5rem; /* 564px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.overlay-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000 !important;
+    pointer-events: none;
+    display: flex;
+    overflow: visible !important;
+}
+
+.overlay {
+    display: flex;
+    opacity: 0;
+
+    /**
+     * 100% is the height of the overlay
+     * 100vh is the height of the viewport
+     *
+     * To adapt the animation distance to the screen height (because we don't want the overlay to only
+     * animate part of the way on larger screens, or ultra-fast on smaller screens), we calculcate the
+     * distance between the top of the overlay to the top of the viewport [(100vh - 100%) / 2] and add
+     * the height of the overlay to it [+ 100%]. Then we just turn it around into a negative distance
+     * [-1 *] so it animates from and to the top, and we add a little extra [1.1 = +10%] so the easing
+     * doesn't stop at the top of the viewport.
+     */
+    transform: translate3D(0, calc(-1.1 * ((100vh - 100%) / 2 + 100%)), 0);
+    transition: transform var(--overlay-transition-time) cubic-bezier(0.3, 0, 0, 1),
+        opacity 0s var(--overlay-transition-time);
+}
+
+.overlay-frame:not(:target) .overlay [prevent-tabbing] {
+    display: none !important;
+}
+
+.underlay {
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-time) var(--nimiq-ease);
+    transform-origin: center bottom;
+}
+
+.underlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(31, 35, 72, 0.25);
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity var(--transition-time) cubic-bezier(0.5, 0, 0.15, 1);
+}
+
+.overlay-frame:target .overlay {
+    pointer-events: all;
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+    transition: transform var(--overlay-transition-time) cubic-bezier(.3, 1, 0.2, 1);
+}
+
+.overlay-frame:target ~ .underlay {
+    display: flex;
+    transform: scale(0.942857143) translateY(1.5rem) !important;
+}
+
+.overlay-frame:target ~ .underlay::after {
+    opacity: 1;
+}
+
+.overlay .close-overlay {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    border: 0;
+    padding: 0;
+    height: 3rem;
+    font-size: 3rem;
+    background-color: unset;
+}
+
+.overlay .close-overlay .nq-icon {
+    opacity: .2;
+    transition: opacity .3s var(--nimiq-ease);
+}
+
+.overlay .close-overlay:hover .nq-icon,
+.overlay .close-overlay:active .nq-icon,
+.overlay .close-overlay:focus .nq-icon {
+    opacity: .4;
+}
+
+@media (max-width: 450px) {
+    .overlay-container {
+        --transition-time: 0.5s;
+    }
+
+    .overlay-frame {
+        overflow: hidden !important;
+    }
+
+    .overlay-frame .overlay {
+        /**
+         * 100% is the height of the overlay
+         */
+        transform: translate3D(0, 100%, 0);
+    }
+
+    .underlay {
+        transform-origin: center top;
+    }
+
+    .overlay-frame:target ~ .underlay {
+        transform: scale(0.942857143) translateY(-1.5rem) !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Instead of translating the overlay, simply fade it in */
+    .overlay,
+    .overlay-frame:target .overlay {
+        transition: opacity var(--overlay-transition-time) var(--nimiq-ease);
+    }
+}
+.login-file-animation {
+    width: 114px;
+    height: 186px;
+    position: relative;
+}
+
+.login-file-animation .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.64, 0, 0.78, 0);
+}
+
+.login-file-animation svg {
+    color: #D2D3DA;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.login-file-animation .border:nth-child(1) { stroke-dasharray: 92 440 585 0; animation: border-1 3s ease-in-out infinite; }
+.login-file-animation .border:nth-child(2) { stroke-dasharray: 0 102 50 585; animation: border-2 3s ease-in-out infinite; }
+.login-file-animation .border:nth-child(3) { stroke-dasharray: 0 230 195 585; animation: border-3 3s ease-in-out infinite; }
+
+@keyframes border-1 {
+    from { stroke-dasharray: 62 440 585 0; }
+    50%  { stroke-dasharray: 122 440 585 0; }
+    to   { stroke-dasharray: 62 440 585 0; }
+}
+
+@keyframes border-2 {
+    from { stroke-dasharray: 0 72 50 585; }
+    50%  { stroke-dasharray: 0 132 50 585; }
+    to   { stroke-dasharray: 0 72 50 585; }
+}
+
+@keyframes border-3 {
+    from { stroke-dasharray: 0 200 195 585; }
+    50%  { stroke-dasharray: 0 260 195 585; }
+    to   { stroke-dasharray: 0 200 195 585; }
+}
+
+.login-file-animation.step-1 .border:nth-child(1),
+.login-file-animation.step-1 .border:nth-child(2),
+.login-file-animation.step-1 .border:nth-child(3),
+.login-file-animation.colored .border { animation: none; }
+
+.login-file-animation .border {
+    transition: stroke-dasharray 0.3s, opacity 0.3s 0.12s;
+}
+
+.login-file-animation .title,
+.login-file-animation .date {
+    transition: stroke 0.3s;
+}
+
+.login-file-animation .logo,
+.login-file-animation .key {
+    transition: opacity 0.3s, fill 0.3s;
+}
+
+.login-file-animation .waves * {
+    stroke-dasharray: 0 124;
+}
+
+.login-file-animation .key,
+.login-file-animation .qr {
+    opacity: 0;
+}
+
+.login-file-animation .qr {
+    transition: opacity 0.3s;
+}
+
+.login-file-animation.step-1 .border:nth-child(1) { stroke-dasharray: 92 430 585 0; }
+.login-file-animation.step-1 .border:nth-child(3) { stroke-dasharray: 0 220 205 585; }
+
+.login-file-animation.step-2 .border:nth-child(3) { stroke-dasharray: 0 200 225 585; }
+
+.login-file-animation.step-3 .border:nth-child(3) { stroke-dasharray: 0 180 245 585; }
+
+.login-file-animation.step-4 .border:nth-child(1) { stroke-dasharray: 94 410 585 0; }
+.login-file-animation.step-4 .border:nth-child(3) { stroke-dasharray: 0 160 265 585; }
+
+.login-file-animation.step-5 .border:nth-child(1) { stroke-dasharray: 94 375 585 0; }
+
+.login-file-animation.step-6 .border:nth-child(1) { stroke-dasharray: 102 367 585 0; }
+
+.login-file-animation.step-7 .border:nth-child(1) { stroke-dasharray: 102 350 585 0; }
+.login-file-animation.step-7 .border:nth-child(3) { stroke-dasharray: 0 160 282 585; }
+
+.login-file-animation.step-8 .border:nth-child(1), .login-file-animation.colored .border:nth-child(1) { stroke-dasharray: 102 345 585 0; }
+.login-file-animation.step-8 .border:nth-child(3), .login-file-animation.colored .border:nth-child(3) { stroke-dasharray: 0 152 295 585; }
+.login-file-animation.step-8 .key { opacity: 1; }
+
+.login-file-animation.step-1 .qr:nth-child(1),
+.login-file-animation.step-2 .qr:nth-child(2),
+.login-file-animation.step-3 .qr:nth-child(3),
+.login-file-animation.step-4 .qr:nth-child(4),
+.login-file-animation.step-5 .qr:nth-child(5),
+.login-file-animation.step-6 .qr:nth-child(6),
+.login-file-animation.step-7 .qr:nth-child(7),
+.login-file-animation.step-8 .qr:nth-child(8) { opacity: 1; }
+
+.login-file-animation.colored .background {
+    opacity: 1;
+}
+
+.login-file-animation.colored .border {
+    opacity: 0;
+}
+
+.login-file-animation.colored .waves,
+.login-file-animation.colored .title,
+.login-file-animation.colored .date {
+    stroke: rgba(255, 255, 255, 0.5);
+}
+
+.login-file-animation.colored .waves * {
+    stroke-dasharray: 124 124;
+    transition: stroke-dasharray 1s ease-in;
+}
+
+.login-file-animation.colored .waves path:nth-child(1) { transition-delay: 0.48s; }
+.login-file-animation.colored .waves path:nth-child(2) { transition-delay: 0.28s; }
+.login-file-animation.colored .waves path:nth-child(3) { transition-delay: 0.46s; }
+.login-file-animation.colored .waves path:nth-child(4) { transition-delay: 0.26s; }
+.login-file-animation.colored .waves path:nth-child(5) { transition-delay: 0.44s; }
+.login-file-animation.colored .waves path:nth-child(6) { transition-delay: 0.24s; }
+.login-file-animation.colored .waves path:nth-child(7) { transition-delay: 0.42s; }
+.login-file-animation.colored .waves path:nth-child(8) { transition-delay: 0.22s; }
+.login-file-animation.colored .waves path:nth-child(9) { transition-delay: 0.40s; }
+.login-file-animation.colored .waves path:nth-child(10){ transition-delay: 0.20s; }
+
+.login-file-animation.colored .logo {
+    fill: rgba(255, 255, 255, 0.5);
+}
+
+.login-file-animation.colored .key {
+    opacity: 1;
+    fill: rgba(255, 255, 255, 0.4);
+}
+
+.login-file-animation.colored .qr {
+    transition: opacity 0.3s, stroke 0s 0.3s;
+    stroke: rgba(255, 255, 255, 0.6);
+}
+.download-loginfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    outline: none;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.download-loginfile .loginfile-link {
+    position: relative;
+    flex-grow: 1;
+    min-height: 30rem;
+    max-height: 40rem;
+}
+
+.download-loginfile .loginfile {
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.download-loginfile .long-touch-indicator {
+    width: 11rem;
+    height: 11rem;
+    position: absolute;
+    left: calc(50% - 5.5rem);
+    top: 25.5rem; /* To lie over the wallet indicator on the Login File*/
+    pointer-events: none;
+    display: none;
+    stroke: white;
+}
+
+.download-loginfile .long-touch-indicator.animate {
+    /* The animation duration is not 800ms like the LONG_TOUCH_DURATION,
+       because testing revealed that then the indicator does not fill
+       up completely. With 700ms it fills up completely when the
+       pop-up menu is shown. */
+    animation: long-touch-indicator-animation 700ms linear forwards;
+}
+
+@keyframes long-touch-indicator-animation {
+    from {
+        stroke-dashoffset: 100.5;
+        stroke: rgba(255, 255, 255, 0.6);
+    }
+}
+
+.download-loginfile .loginfile-description {
+    font-size: 2rem;
+    margin: 3rem 0 0;
+}
+
+.download-loginfile .loginfile-description:not(.visible) {
+    display: none;
+}
+
+.download-loginfile .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.download-loginfile .nq-button {
+    margin-top: 3rem;
+    margin-bottom: 0;
+}
+
+.download-loginfile .download-button {
+    min-width: 0;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    padding-left: 3rem;
+}
+
+.download-loginfile .download-button > .nq-icon {
+    margin-right: 1.5rem;
+    font-size: 2.5rem;
+}
+
+.download-loginfile.maybe-downloaded .download-button {
+    padding: 0 1rem 0 2.5rem;
+    background: rgba(31, 35, 72, .07);
+    color: var(--nimiq-blue);
+    box-shadow: none;
+    transform: none;
+    transition: background 0.3s var(--nimiq-ease);
+}
+
+.download-loginfile.maybe-downloaded .download-button::before {
+    display: none;
+}
+
+.download-loginfile.maybe-downloaded .download-button:hover,
+.download-loginfile.maybe-downloaded .download-button:focus {
+    background: rgba(31, 35, 72, .12);
+}
+
+.download-loginfile .continue {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    margin-left: 1rem;
+    flex-shrink: 0;
+    padding-right: 2.25rem;
+}
+
+.download-loginfile:not(.maybe-downloaded) .continue {
+    padding-left: 2.25rem;
+}
+
+.download-loginfile .continue > span {
+    margin-right: 1rem;
+}
+
+.download-loginfile .continue > .nq-icon {
+    margin-right: 0.5rem; /* To visually center the icon, which itself has more space on the left than on the right */
+    font-size: 2.5rem;
+}
+
+.download-loginfile:not(.fallback-download) .tap-and-hold,
+.download-loginfile.fallback-download .download-button,
+.download-loginfile:not(.maybe-downloaded) .continue > span,
+.download-loginfile.maybe-downloaded .download-button > span {
+    display: none;
+}
+
+.download-loginfile .tap-and-hold {
+    text-align: center;
+    margin: 3rem 1rem 0 auto;
+    font-size: 2rem;
+    line-height: 1.25;
+    color: rgba(31, 35, 72, .5) !important; /* important is necessary for iOS to overwrite <a> colors; based on Nimiq Blue */
+    white-space: pre-line;
+}
+#app {
+    perspective: 250rem;
+}
+
+#rotation-container {
+    position: relative;
+    width: 100%;
+    max-width: 56.5rem; /* 420px + 2 * 2rem because of .nq-card margin*/
+    height: 70.5rem; /* 564px */
+    transition: transform 0.6s, height 0.6s;
+    transform-style: preserve-3d;
+    will-change: transform, height;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#rotation-container.disable-transition {
+    transition: none;
+}
+
+#rotation-container > .page.flipped,
+#rotation-container.flipped {
+    transform: rotateY(-180deg);
+}
+
+#rotation-container > .page {
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    margin: inherit;
+}
+
+#rotation-container > .page.display-flex:not(:target) { /* :not(:target) is only required for specificity */
+    display: flex;
+    z-index: 3;
+}
+
+#rotation-container > .page:not(.flipped) {
+    transform: rotateY(0deg);
+    z-index: 2;
+}
+
+#rotation-container > .page:target {
+    z-index: 3;
+}
+.identicon-selector {
+    width: 100%;
+    text-align: center;
+}
+
+.identicon-selector .wrapper {
+    width: 12.5rem;
+    height: 12.5rem;
+    position: absolute;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.identicon-selector .wrapper .identicon {
+    width: 100%;
+    height: 100%;
+    animation: identicon-selector-pop-in 500ms var(--nimiq-ease);
+    animation-fill-mode: both;
+}
+
+@keyframes identicon-selector-pop-in {
+    from { transform: scale(0); opacity: 0 }
+    to   { transform: scale(1); opacity: 1 }
+}
+
+.identicon-selector .wrapper .identicon img {
+    transition: transform 500ms var(--nimiq-ease);
+}
+
+.identicon-selector .wrapper:hover,
+.identicon-selector .wrapper:focus {
+    cursor: pointer;
+    outline: none;
+}
+
+.identicon-selector .identicons {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 39.5rem;
+    position: relative;
+}
+
+.identicon-selector .wrapper:nth-child(1) { transform: translate(  0.0rem, -13.5rem); }
+.identicon-selector .wrapper:nth-child(2) { transform: translate(-11.5rem,  -6.75rem); }
+.identicon-selector .wrapper:nth-child(3) { transform: translate( 11.5rem,  -6.75rem); }
+.identicon-selector .wrapper:nth-child(4) { transform: translate(  0.0rem,   0.00rem); }
+.identicon-selector .wrapper:nth-child(5) { transform: translate(-11.5rem,   6.75rem); }
+.identicon-selector .wrapper:nth-child(6) { transform: translate( 11.5rem,   6.75rem); }
+.identicon-selector .wrapper:nth-child(7) { transform: translate(  0.0rem,  13.5rem); }
+
+
+.identicon-selector .wrapper:nth-child(1):focus img, .identicon-selector .wrapper:nth-child(1):hover img,
+.identicon-selector .wrapper:nth-child(2):focus img, .identicon-selector .wrapper:nth-child(2):hover img,
+.identicon-selector .wrapper:nth-child(3):focus img, .identicon-selector .wrapper:nth-child(3):hover img,
+.identicon-selector .wrapper:nth-child(4):focus img, .identicon-selector .wrapper:nth-child(4):hover img,
+.identicon-selector .wrapper:nth-child(5):focus img, .identicon-selector .wrapper:nth-child(5):hover img,
+.identicon-selector .wrapper:nth-child(6):focus img, .identicon-selector .wrapper:nth-child(6):hover img,
+.identicon-selector .wrapper:nth-child(7):focus img, .identicon-selector .wrapper:nth-child(7):hover img {
+    transform: scale(1.1);
+}
+
+.identicon-selector .wrapper:nth-child(1) .identicon { animation-delay: 100ms; }
+.identicon-selector .wrapper:nth-child(2) .identicon { animation-delay: 150ms; }
+.identicon-selector .wrapper:nth-child(3) .identicon { animation-delay: 150ms; }
+.identicon-selector .wrapper:nth-child(4) .identicon { animation-delay: 200ms; }
+.identicon-selector .wrapper:nth-child(5) .identicon { animation-delay: 250ms; }
+.identicon-selector .wrapper:nth-child(6) .identicon { animation-delay: 250ms; }
+.identicon-selector .wrapper:nth-child(7) .identicon { animation-delay: 300ms; }
+
+.identicon-selector p {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 0.25rem;
+}
+
+.identicon-selector p + p {
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+}
+.page#choose-identicon .page-body {
+    padding-bottom: 3rem;
+}
+
+.page#choose-identicon .page-body,
+.page#set-password .page-body {
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page#set-password .page-body p {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 2rem;
+    white-space: pre-line;
+}
+
+.page#set-password.repeat-password .hide-on-repetition,
+.page#set-password:not(.repeat-password) .show-on-repetition {
+    display: none;
+}
+
+.overlay {
+    align-items: center;
+}
+
+.overlay .identicon {
+    width: 18rem;
+    height: 18rem;
+    margin-top: 5rem;
+    margin-bottom: -0.75rem;
+}
+
+.overlay .nq-label {
+    margin: 4rem 0 1rem;
+    font-weight: 900;
+    opacity: 0.5;
+}
+
+.overlay .address {
+    width: 100%;
+    max-width: 27.375rem;
+    box-sizing: content-box;
+    text-transform: uppercase;
+    line-height: 1.75;
+    opacity: 1;
+    color: rgba(31, 35, 72, .5);
+    font-size: 3rem;
+    white-space: pre-wrap;
+    word-spacing: 0.75rem;
+    padding-left: 0.75rem;
+}
+
+.overlay .nq-button {
+    margin-bottom: 4rem;
+}
+
+.page#login-file-download .page-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.page#login-file-download.loginfile-download-initiated .page-header .nq-h1:not(.confirm-download),
+.page#login-file-download:not(.loginfile-download-initiated) .page-header .confirm-download,
+.page#login-file-download.loginfile-download-initiated .skip {
+    display: none;
+}
+
+.page#login-file-download .skip {
+    margin-top: -2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.page#login-file-explainer .nq-notice {
+    margin-top: 2rem;
+}
+
+.page#login-file-explainer .page-body {
+    padding-top: 2rem;
+    padding-left: 0;
+}
+
+.page#login-file-explainer .page-body p {
+    color: white;
+}
+
+.page#login-file-explainer .page-body p + p {
+    margin-top: 2.5rem;
+}
+
+.page#login-file-explainer .page-body img {
+    float: left;
+    border-top-right-radius: 0.615rem;
+    border-bottom-right-radius: 0.615rem;
+    margin: 0.5rem 4rem 0 0;
+}

@@ -1,0 +1,414 @@
+/* Pure CSS component */
+
+.tooltip {
+    position: relative;
+    outline: none;
+}
+
+.tooltip::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 2.25rem;
+    height: 2rem;
+    top: 100%;
+    left: calc(50% - 1.125rem);
+    mask-image: url('data:image/svg+xml,<svg viewBox="0 0 18 16" xmlns="http://www.w3.org/2000/svg"><path d="M9 7.12c-.47 0-.93.2-1.23.64L3.2 14.29A4 4 0 0 1 0 16h18a4 4 0 0 1-3.2-1.7l-4.57-6.54c-.3-.43-.76-.64-1.23-.64z" fill="white"/></svg>');
+    -webkit-mask-image: url('data:image/svg+xml,<svg viewBox="0 0 18 16" xmlns="http://www.w3.org/2000/svg"><path d="M9 7.12c-.47 0-.93.2-1.23.64L3.2 14.29A4 4 0 0 1 0 16h18a4 4 0 0 1-3.2-1.7l-4.57-6.54c-.3-.43-.76-.64-1.23-.64z" fill="white"/></svg>');
+    z-index: 1000; /* move above tooltip-box's box-shadow */
+    background: #201e45; /* a color of the nimiq-blue-bg gradient in the upper area */
+}
+
+.tooltip.top::after {
+    top: unset;
+    bottom: 100%;
+    background: #250636; /* a color of the nimiq-blue-bg gradient in the lower area */
+    transform: scaleY(-1);
+}
+
+.tooltip .tooltip-box {
+    position: absolute;
+    top: calc(100% + 2rem);
+    padding: 1.5rem;
+    border-radius: .5rem;
+    font-size: 1.75rem;
+    line-height: 1.5;
+    font-weight: 600;
+    color: white;
+    z-index: 999;
+    background: var(--nimiq-blue-bg);
+    box-shadow: 0 1.125rem 2.275rem rgba(0, 0, 0, 0.11);
+}
+
+.tooltip.top .tooltip-box {
+    top: unset;
+    bottom: calc(100% + 2rem);
+}
+
+.tooltip::after,
+.tooltip .tooltip-box {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s var(--nimiq-ease), visibility .3s;
+}
+
+.tooltip.show-tooltip::after,
+.tooltip.show-tooltip .tooltip-box,
+.tooltip:not(.disable-auto-tooltip):hover::after,
+.tooltip:not(.disable-auto-tooltip):hover .tooltip-box,
+.tooltip:not(.disable-auto-tooltip):focus::after,
+.tooltip:not(.disable-auto-tooltip):focus .tooltip-box {
+    visibility: visible;
+    opacity: 1;
+}
+.tooltip.fee-breakdown .tooltip-box {
+    width: 31.5rem;
+    padding: 1.5rem 2rem;
+    margin-left: -15rem;
+}
+
+.tooltip.fee-breakdown .price-breakdown {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 2rem;
+    row-gap: 1.5rem;
+    white-space: nowrap;
+    margin: 1rem 0;
+}
+
+.tooltip.fee-breakdown .price-breakdown:first-child {
+    margin-top: 0;
+}
+
+.tooltip.fee-breakdown .price-breakdown:last-child {
+    margin-bottom: 0;
+}
+
+.tooltip.fee-breakdown .explainer {
+    font-size: 1.75rem;
+    opacity: 0.6;
+    margin: -1rem 0 0;
+}
+
+.tooltip.fee-breakdown hr {
+    margin: 1.75rem -1rem 1.5rem;
+    border: unset;
+    border-top: 1px solid currentColor;
+    opacity: .2;
+}
+
+.tooltip.fee-breakdown .total-fees {
+    font-weight: bold;
+}
+.balance-distribution-bar {
+    height: 3.5rem;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.balance-distribution-bar .bar {
+    height: 2.5rem;
+    min-width: 0.25rem;
+    border-radius: 0.5rem;
+    margin-right: 0.375rem;
+    opacity: 0.25;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.balance-distribution-bar .bar.active {
+    opacity: 1;
+}
+
+.balance-distribution-bar .bar .change {
+    background: url('../assets/swap-change-background.svg') repeat-x;
+    height: calc(100% - 0.5rem);
+    margin: 0 0.25rem;
+    border-radius: 0.125rem;
+}
+
+.balance-distribution-bar .bar.bitcoin {
+    background-color: #F7931A; /* Bitcoin orange */
+}
+
+.balance-distribution-bar .bar:last-child {
+    margin-right: 0;
+    justify-content: flex-start;
+}
+
+.balance-distribution-bar .separator {
+    width: 0.25rem;
+    height: 3.5rem;
+    background: rgba(31, 35, 72, 0.3);
+    border-radius: 1rem;
+    margin-right: 0.375rem;
+    flex-shrink: 0;
+}
+
+.balance-distribution-bar > div:first-child {
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.balance-distribution-bar > div:last-child {
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+.page.layout-slider {
+    max-width: 63.5rem;
+}
+
+.nim-symbol,
+.btc-symbol,
+.eur-symbol {
+    margin-left: 0.25em;
+}
+
+.columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-column {
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.right-column {
+    text-align: right;
+    justify-content: flex-end;
+}
+
+.nq-notice {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0 !important;
+}
+
+.pill {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: rgba(31, 35, 72, 0.6);
+    padding: 0.75rem 1.5rem;
+    border-radius: 5rem;
+    box-shadow: inset 0 0 0 1.5px rgba(31, 35, 72, 0.15);
+}
+
+.nq-notice .tooltip {
+    margin-top: 2rem;
+}
+
+.nq-notice .tooltip + .tooltip {
+    margin-left: 0.75rem;
+}
+
+.tooltip .tooltip-box {
+    text-align: left;
+    width: 25.5rem;
+    font-size: 2rem;
+}
+
+.tooltip.exchange-rate .tooltip-box {
+    line-height: 1.3;
+}
+
+.label {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.identicon img {
+    display: block;
+}
+
+/********************************************
+ *             STANDARD LAYOUT              *
+ ********************************************/
+
+.page-body.layout-standard {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2.25rem;
+}
+
+.layout-standard .accounts {
+    flex-direction: row;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+    flex-shrink: 0;
+    margin-top: 1rem;
+}
+
+.layout-standard .account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    width: calc(50% - 1.5rem);
+    color: var(--nimiq-dark-blue);
+    outline: none;
+}
+
+/* .address-info:not(.detailed-view):not(.cashlink) {
+    cursor: pointer;
+} */
+
+.layout-standard .account .identicon {
+    width: 9rem;
+    height: 9rem;
+    border-radius: 1rem;
+    transition: transform 0.45s var(--nimiq-ease);
+    flex-shrink: 0;
+}
+
+.layout-standard .account.eur .identicon,
+.layout-standard .account.btc .identicon {
+    padding: .25rem;
+}
+
+/* .address-info:not(.detailed-view):not(.cashlink):focus .identicon,
+.address-info:not(.detailed-view):not(.cashlink):hover .identicon {
+    transform: scale(1.1);
+} */
+
+.layout-standard .account .label {
+    font-size: 2rem;
+    margin: 1.75rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    width: 18.5rem; /* 148px, the width the automatic labels are designed for */
+}
+
+.layout-standard .account .label.mono {
+    font-family: "Fira Mono", "Andale Mono", monospace;
+}
+
+.layout-standard .account .unlabelled .label {
+    opacity: .5;
+}
+
+.layout-standard .account:not(.detailed-view) .label::after {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+}
+
+.layout-standard .arrow {
+    margin-top: 3.5rem;
+    height: 2.25rem;
+    width: 3rem;
+    color: var(--nimiq-light-blue);
+}
+
+.layout-standard .swap-values {
+    display: inline-flex;
+    align-items: flex-start;
+    margin: 0 auto;
+}
+
+.layout-standard .from-value {
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+.layout-standard .from-symbol {
+    font-size: 0.625em;
+    font-weight: bold;
+}
+
+.layout-standard .to-value {
+    font-size: 2.5rem;
+    font-weight: 600;
+    opacity: 0.6;
+}
+
+.layout-standard .to-value svg {
+    opacity: 0.5;
+    margin-left: 1.5rem;
+    margin-right: 0.375rem;
+}
+
+.layout-standard .to-symbol {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+/********************************************
+ *              SLIDER LAYOUT               *
+ ********************************************/
+
+.layout-slider .address-infos {
+    margin-bottom: 2.75rem;
+}
+
+.layout-slider .left-account,
+.layout-slider .right-account {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 50%;
+}
+
+.layout-slider .identicon {
+    width: 5.75rem;
+    margin: -0.25rem 1.5rem -0.25rem 0;
+    flex-shrink: 0;
+}
+
+.layout-slider .btc .identicon {
+    width: 5.25rem;
+    height: 5.25rem;
+    margin: -0.25rem 0 -0.25rem 2rem;
+}
+
+.layout-slider .swap-values,
+.layout-slider .new-balances {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    line-height: 1;
+}
+
+.layout-slider .fiat {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.layout-slider .new-balances .fiat {
+    opacity: 0.4;
+}
+
+.layout-slider .new-balances {
+    margin-bottom: 1rem;
+}
+
+.layout-slider .swap-values.nim-to-btc .right-column,
+.layout-slider .swap-values.btc-to-nim .left-column {
+    color: var(--nimiq-green);
+}
+
+.layout-slider .swap-values.nim-to-btc .right-column .fiat,
+.layout-slider .swap-values.btc-to-nim .left-column .fiat {
+    opacity: 0.7;
+}
+
+.layout-slider .swap-values.nim-to-btc .left-column .fiat,
+.layout-slider .swap-values.btc-to-nim .right-column .fiat {
+    opacity: 0.4;
+}

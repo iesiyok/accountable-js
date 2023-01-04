@@ -1,0 +1,32 @@
+{
+  "url": "http://localhost:8085/casedelegatetrust/index.html",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "inline",
+      "load": "sync",
+      "hash": "sha256-XT0yF1DRjbn5ymbnsasJnag4+53huda0TZ3bRPIcrAA=",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "type": "iframe",
+      "seq": 1,
+      "src_type": "link",
+      "src": "http://localhost:8081/",
+      "crossorigin": "",
+      "dynamic": false,
+      "trust": "delegate"
+    },
+    {
+      "seq": 2,
+      "type": "event_handler",
+      "hash": "sha256-UQBCN2BevXO0QwOyCNUP7VrWPIiWgdZQAiIaSdb7Co8=",
+      "dynamic": false,
+      "trust": "assert"
+    }
+  ]
+}

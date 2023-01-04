@@ -1,0 +1,50 @@
+.page#unlock {
+    position: relative;
+}
+
+.page#unlock .lock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.page#unlock .nq-icon.locked {
+    width: 8rem;
+    height: 11.52875rem;
+    flex-shrink: 0;
+    opacity: 0.4;
+}
+
+.page#unlock .blurred-identicons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+}
+
+.page#unlock .blurred-identicons img {
+    width: 39.328rem;
+    opacity: 0.2;
+    -webkit-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -o-filter: blur(20px);
+    -ms-filter: blur(20px);
+    filter: blur(20px);
+}
+
+.page#unlock .page-header,
+.page#unlock .page-body,
+.page#unlock .page-footer {
+    z-index: 1;
+}
+
+.page#unlock .page-body {
+    display: flex;
+    flex-direction: column;
+}

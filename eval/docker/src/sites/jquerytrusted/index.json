@@ -1,0 +1,29 @@
+{
+  "url": "http://localhost:8085/jquerytrusted/index.html",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js",
+      "hash": "sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9",
+      "crossorigin": "anonymous",
+      "load": "sync",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 1,
+      "type": "inline",
+      "load": "sync",
+      "hash": "sha256-3331xf4nUJKbuNbNBVhjjjA9Qx00HeP4ncNQ+kMywNo=",
+      "dynamic": true,
+      "persistent": false,
+      "trust": "assert"
+    }
+  ]
+}

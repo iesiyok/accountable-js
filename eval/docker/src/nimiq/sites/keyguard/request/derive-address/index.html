@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' 'unsafe-eval';
+          img-src http: https: blob: data:;
+          child-src 'self' blob:;
+          style-src 'self';
+          font-src 'self';">
+    <title>Nimiq Keyguard</title>
+
+    <script defer src="/assets/nimiq/web-offline.js" integrity="sha256-iDfmzBmIDoojNYH3IARpHJH1Gm+4hTzmBpTTCwlaj0U="></script>
+    <script defer src="/request/common.77c736d1.js" integrity="sha256-d8c20Uxsv4O+XggeyzifKxmRsz2PJJeJdByNaD41wX0="></script>
+    <script defer src="/request/toplevel.b7c156ac.js" integrity="sha256-t8FWrGJ/vYoguNfJcFi2LRMegBY4azL7pOOhjyGbvgc="></script>
+    <script defer src="/request/derive-address/index.c3477bfe.js" integrity="sha256-w0d7/qQ77Bli7+ckKOYXPX6uiXWXBHG7JL7rwLhuhSQ="></script>
+
+
+
+
+    <link rel="stylesheet" href="/request/toplevel.a4cf8ba9.css" integrity="sha256-pM+LqeaY9tqh2VhlVTpiwiaQtIHnZNlpbY0UKE5Tsgo=">
+    <link rel="stylesheet" href="/request/derive-address/index.ff323b41.css" integrity="sha256-/zI7QeEYtPM+6QKZkhHnh5wwNNilmTfwAHNKv/jGXfw=">
+
+</head>
+<body class="loading">
+    <div class="header-top">
+        <div class="nimiq-app-name">
+            <span class="nimiq-logo"></span>
+        </div>
+    </div>
+
+    <div id="app">
+        <div id="unlock" class="page nq-card">
+            <div class="page-header nq-card-header">
+                <h1 data-i18n="derive-address-heading-password" class="nq-h1">Unlock new Addresses</h1>
+                <p class="nq-notice info" data-i18n="derive-address-password-text">
+                    To add a new address, please[br]unlock your account first.
+                </p>
+            </div>
+
+            <div class="page-body nq-card-body">
+                <div class="lock-container">
+                    <svg class="nq-icon locked"><use xlink:href="/assets/nimiq-style.icons.svg#nq-lock-locked"/></svg>
+                </div>
+            </div>
+
+            <div class="page-footer nq-card-footer">
+                <form class="password-box"></form>
+            </div>
+
+            <div class="blurred-identicons">
+                <img src="../../assets/blurred-identicons.svg">
+            </div>
+        </div>
+
+        <button class="global-close nq-button-s display-none">
+            <svg class="nq-icon"><use xlink:href="/assets/nimiq-style.icons.svg#nq-arrow-left-small"/></svg>
+            <span id="global-close-text"></span>
+        </button>
+
+        <div id="loading" class="page">
+            <!-- Loading spinner SVG -->
+            <svg height="48" width="54" color="inherit" class="loading-spinner"><g>
+                <path class="big-hex" d="M51.9,21.9L41.3,3.6c-0.8-1.3-2.2-2.1-3.7-2.1H16.4c-1.5,0-2.9,0.8-3.7,2.1L2.1,21.9c-0.8,1.3-0.8,2.9,0,4.2 l10.6,18.3c0.8,1.3,2.2,2.1,3.7,2.1h21.3c1.5,0,2.9-0.8,3.7-2.1l10.6-18.3C52.7,24.8,52.7,23.2,51.9,21.9z" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.4" stroke-dasharray="92.5 60"/>
+                <path class="small-hex" d="M51.9,21.9L41.3,3.6c-0.8-1.3-2.2-2.1-3.7-2.1H16.4c-1.5,0-2.9,0.8-3.7,2.1L2.1,21.9c-0.8,1.3-0.8,2.9,0,4.2 l10.6,18.3c0.8,1.3,2.2,2.1,3.7,2.1h21.3c1.5,0,2.9-0.8,3.7-2.1l10.6-18.3C52.7,24.8,52.7,23.2,51.9,21.9z" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="47.5 105"/>
+            </g></svg>
+        </div>
+    </div>
+</body>
+</html>

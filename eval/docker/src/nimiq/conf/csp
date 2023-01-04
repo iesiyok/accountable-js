@@ -1,0 +1,9 @@
+
+wallet.conf ~~ CSP
+
+location / {
+               try_files $uri /index.html /example.html =404;
+
+               add_header content-security-policy "sandbox allow-same-origin allow-scripts allow-forms; ";
+               
+            }

@@ -1,0 +1,139 @@
+{
+  "url": "https://web.whatsapp.com/",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/vendors~main.0a0120db6abbbff4bbbf.js",
+      "hash": "sha256-eTaHrueRhsSLoFC00AJdT2uNgnmzVaXZgS8DsVkgiog=",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    },
+    {
+      "seq": 1,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/main.024f9baa0b0ce5dcaef9.js",
+      "hash": "sha256-hgnRztswZHXLmfFptvC8vYYHlbpNkO8/84zwHRG3+Ak=",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    },
+    {
+      "seq": 2,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/moment_locales/en-GB.d1c84bbb8324ff4424b1.js",
+      "hash": "sha256-4ee/KBQCif0dO9LhcNTylJ7hacCK2XXwryxUzHp9GMA=",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    },
+    {
+      "seq": 3,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/locales/en.15cde9a2b7a77be3d8b1.js",
+      "hash": "sha256-eYo/tTZcb6faGnxZTD7vI7UUcDfCqrW5p3/XDdVn42o=",
+      "crossorigin": null,
+      "load": "async",
+      "dynamic": true,
+      "trust": "assert"
+    },
+    {
+      "seq": 4,
+      "type": "inline",
+      "load": "sync",
+      "hash": "sha256-S3m23JGn7jM3OxFZkcPrKH7XEM+2cIQhtMq2gu3b/L0=",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 5,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/libsignal-protocol-ee5b8ba.min.js",
+      "hash": "sha256-syy0cmFVgANnseRK8v2UC3eu2EzJuqEcA4G/Nd2ZPJg=",
+      "crossorigin": null,
+      "load": "sync",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 6,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/runtime.10e6221e827df05f572a.js",
+      "hash": "sha256-l9VdvajXILS3vRDH9gEhCzqnEXLZT1/vraPgIZLm7Yk=",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 7,
+      "type": "inline",
+      "load": "sync",
+      "hash": "sha256-7UGAV4bdERcQG7mIWDfiQB1TIjwQMRNPzMZ0ecw4cMQ=",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 8,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/vendor1~app.ae7c9071ac6bdfd06f8e.js",
+      "hash": "sha256-611eQL/EwLCaQtTG9K/D1Y9NEHNQXYjzic4uqvC0qZ8=",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 9,
+      "type": "external",
+      "name": "",
+      "version": "",
+      "link": "https://web.whatsapp.com/app.370342c2934091134e27.js",
+      "hash": "sha256-2S4loCO78fu1UA/yKg2hYOmJQueeHrIh4d6PIRtr5Z8=",
+      "crossorigin": null,
+      "load": "defer",
+      "dynamic": false,
+      "persistent": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 10,
+      "type": "inline",
+      "load": "sync",
+      "hash": "sha256-nIzT0PTVr4x/XNHEUgjt0wi/5HLjU6UOTLrL9stYYnw=",
+      "dynamic": false,
+      "persistent": false,
+      "trust": "assert"
+    },
+    {
+      "seq": 11,
+      "type": "inline",
+      "load": "async",
+      "hash": "sha256-2GDuXEt/XaqDkN/Sm/xHyHmlTMB5k4kzxghLWvoWrrI=",
+      "dynamic": false,
+      "persistent": false,
+      "trust": "assert"
+    }
+  ]
+}

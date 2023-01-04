@@ -1,0 +1,16 @@
+{
+  "url": "http://localhost:8085/helloworld/index.html",
+  "name": "",
+  "manifest_version": "??",
+  "description": "??",
+  "contents": [
+    {
+      "seq": 0,
+      "type": "inline",
+      "load": "sync",
+      "hash": "sha256-XT0yF1DRjbn5ymbnsasJnag4+53huda0TZ3bRPIcrAA=",
+      "dynamic": false,
+      "trust": "assert"
+    }
+  ]
+}
